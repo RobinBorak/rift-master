@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-  [SerializeField] private float maxHealth = 5f;
+  private PlayerStats playerStats;
   private float currentHealth;
   // Start is called before the first frame update
   void Start()
   {
-    currentHealth = maxHealth;
+    playerStats = gameObject.GetComponent<PlayerStats>();
+    currentHealth = playerStats.maxHealth;
   }
 
   public void TakeDamage(float damage)

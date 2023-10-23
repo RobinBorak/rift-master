@@ -9,11 +9,13 @@ public class Enemy : MonoBehaviour
   [SerializeField] private float movementSpeed = 2f;
   private float currentHealth;
   private Rigidbody2D rb;
+  private CurrentRiftLogic currentRiftLogic;
   // Start is called before the first frame update
   void Start()
   {
     currentHealth = maxHealth;
     rb = gameObject.GetComponent<Rigidbody2D>();
+    currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
   }
 
   // Update is called once per frame
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
   }
   private void Die()
   {
+    currentRiftLogic?.IncreaseSmallProgress();
     Destroy(gameObject);
   }
 

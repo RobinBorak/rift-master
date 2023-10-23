@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
   private float movementSpeed = 5f;
+  private PlayerStats playerStats;
 
   private JoystickMovement joystickMovement;
   private float moveX;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    playerStats = gameObject.GetComponent<PlayerStats>();
     joystickMovement = FindObjectOfType<JoystickMovement>();
     animator = gameObject.GetComponent<Animator>();
     rb = gameObject.GetComponent<Rigidbody2D>();
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
       lastMoveDirection = moveDirection;
     }
-    rb.velocity = new Vector2(moveDirection.x * movementSpeed, moveDirection.y * movementSpeed);
+    rb.velocity = new Vector2(moveDirection.x * playerStats.movementSpeed, moveDirection.y * playerStats.movementSpeed);
   }
 
   private void Animate()
