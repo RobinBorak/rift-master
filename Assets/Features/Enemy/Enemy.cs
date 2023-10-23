@@ -31,10 +31,10 @@ public class Enemy : MonoBehaviour
       Die();
     }
   }
-  public void TakeDamage(float damage, Transform target)
+  public void TakeDamage(float damage, Transform fromTarget)
   {
     TakeDamage(damage);
-    gameObject.GetComponent<EnemyMovement>().Knockback(target, 50f);
+    gameObject.GetComponent<EnemyMovement>().Knockback(fromTarget, 50f);
   }
   private void Die()
   {

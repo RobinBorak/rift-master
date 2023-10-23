@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
 
   private int maxDistanceToTargetToMove = 10;
-  private float movementSpeed = 2f;
+  private float movementSpeed = 3f;
 
   EnemyCombat enemyCombat;
 

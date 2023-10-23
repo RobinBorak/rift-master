@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyCombat : MonoBehaviour
 {
   private Animator anim;
-  private float attackSpeed = 1f;
+  private float attackSpeed = 1.5f;
   private float attackRange = 1.5f;
   private bool isAttacking = false;
 
