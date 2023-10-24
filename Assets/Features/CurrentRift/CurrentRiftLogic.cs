@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class CurrentRiftLogic : MonoBehaviour
 {
+  private static CurrentRiftLogic instance;
+
   [SerializeField] private Image statusImage;
   [SerializeField] private Image timerImage;
-  private static CurrentRiftLogic instance;
   private CurrentRift currentRift;
 
   public int rift = 0;
@@ -15,6 +16,9 @@ public class CurrentRiftLogic : MonoBehaviour
   private bool complete = false;
   private int timeToComplete = 60;
   private int timeLeft = 0;
+
+  public delegate void CurrentRiftLogicRiftCompleteDelegate();
+  public static event CurrentRiftLogicRiftCompleteDelegate currentRiftLogicRiftCompleteDelegate;
 
   // Start is called before the first frame update
   void Start()
@@ -29,7 +33,6 @@ public class CurrentRiftLogic : MonoBehaviour
     FindObjectOfType<SelectRift>().SetRift(rift);
 
     InvokeRepeating("UpdateTimeLeft", 1f, 1f);
-    DontDestroyOnLoad(gameObject);
   }
 
   private void UpdateTimeLeft()
@@ -47,7 +50,6 @@ public class CurrentRiftLogic : MonoBehaviour
       currentRift.SetRiftDefault();
       GoBackToTown();
     }
-    Debug.Log("Time left: " + timeLeft);
   }
 
   void Awake()
@@ -55,6 +57,7 @@ public class CurrentRiftLogic : MonoBehaviour
     if (instance == null)
     {
       instance = this;
+      DontDestroyOnLoad(gameObject);
     }
     else
     {
@@ -86,6 +89,7 @@ public class CurrentRiftLogic : MonoBehaviour
   private void GoBackToTown()
   {
     UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    currentRiftLogicRiftCompleteDelegate?.Invoke();
     Destroy(gameObject);
   }
 

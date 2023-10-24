@@ -1,16 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+  private static Player instance;
+
   private PlayerStats playerStats;
-  private float currentHealth;
-  private CurrentRiftLogic currentRiftLogic;
-  // Start is called before the first frame update
+
+  public float currentHealth;
+  public delegate void PlayerHealthLossDelegate(float damage);
+  public static event PlayerHealthLossDelegate playerHealthLossDelegate;
+
+  public delegate void PlayerResetDelegate();
+  public static event PlayerResetDelegate playerResetDelegate;
+
+  void Awake()
+  {
+    if (instance == null)
+    {
+      instance = this;
+      DontDestroyOnLoad(gameObject);
+    }
+    else
+    {
+      Destroy(gameObject);
+    }
+  }
+
   void Start()
   {
-    currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
     Reset();
   }
 
@@ -18,6 +38,8 @@ public class Player : MonoBehaviour
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
     currentHealth = playerStats.maxHealth;
+    playerResetDelegate?.Invoke();
+    SceneManager.activeSceneChanged += OnSceneChanged;
   }
 
   public void TakeDamage(float damage)
@@ -27,16 +49,36 @@ public class Player : MonoBehaviour
     {
       Die();
     }
+    else
+    {
+      playerHealthLossDelegate?.Invoke(damage);
+    }
   }
 
   private void Die()
   {
     Debug.Log("Player died");
-    //Find RespawnPosition by name
-    Transform respawnPosition = GameObject.Find("RespawnPosition").transform;
-    transform.position = respawnPosition.position;
-    currentRiftLogic.DecreaseSmallProgress();
+    PlaceAtStartPosition();
     Reset();
+    FindObjectOfType<CurrentRiftLogic>().DecreaseSmallProgress();
+  }
+
+  private void PlaceAtStartPosition()
+  {
+    Transform startPosition = GameObject.Find("RespawnPosition").transform;
+    transform.position = startPosition.position;
+  }
+
+  private void OnSceneChanged(Scene current, Scene next)
+  {
+    if (next.buildIndex == 0)
+    {
+      Destroy(gameObject);
+    }
+    else //if (next.name == "Rift")
+    {
+      PlaceAtStartPosition();
+    }
   }
 
 }

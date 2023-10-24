@@ -23,7 +23,6 @@ public class SelectRift : MonoBehaviour
 
   private void LoadMap()
   {
-    // Load scene
     UnityEngine.SceneManagement.SceneManager.LoadScene(GetRandomMap());
   }
 
