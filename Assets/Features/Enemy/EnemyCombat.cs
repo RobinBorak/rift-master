@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
 {
+  private EnemyStats enemyStats;
   private Animator anim;
-  private float attackSpeed = 1.5f;
-  private float attackRange = 1.5f;
   private bool isAttacking = false;
 
   private Transform attackPoint;
 
   private void Start()
   {
+    enemyStats = gameObject.GetComponent<EnemyStats>();
     anim = gameObject.GetComponent<Animator>();
     attackPoint = transform.Find("AttackPoint").transform;
   }
@@ -29,26 +29,18 @@ public class EnemyCombat : MonoBehaviour
 
   private void Swing()
   {
-    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, LayerMask.GetMask("Player"));
+    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, enemyStats.attackRange, LayerMask.GetMask("Player"));
     foreach (Collider2D player in hitEnemies)
     {
       player.GetComponent<Player>().TakeDamage(1f);
     }
 
-    Invoke("ResetIsAttacking", attackSpeed);
+    Invoke("ResetIsAttacking", enemyStats.attackSpeed);
   }
 
   private void ResetIsAttacking()
   {
     isAttacking = false;
   }
-
-
-  // Getters and Setters
-  public float GetAttackRange
-  {
-    get { return attackRange; }
-  }
-
 
 }

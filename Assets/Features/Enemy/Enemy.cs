@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-  [SerializeField] private float maxHealth = 5f;
-  [SerializeField] private int maxDistanceToTargetToMove = 10;
-  [SerializeField] private float movementSpeed = 2f;
+  private EnemyStats enemyStats;
+
   private float currentHealth;
   private Rigidbody2D rb;
   private CurrentRiftLogic currentRiftLogic;
   // Start is called before the first frame update
   void Start()
   {
-    currentHealth = maxHealth;
+    enemyStats = gameObject.GetComponent<EnemyStats>();
+    currentHealth = enemyStats.maxHealth;
     rb = gameObject.GetComponent<Rigidbody2D>();
     currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
   }
@@ -40,16 +40,5 @@ public class Enemy : MonoBehaviour
   {
     currentRiftLogic?.IncreaseSmallProgress();
     Destroy(gameObject);
-  }
-
-  //Getters and Setters
-  public int GetMaxDistanceToTargetToMove
-  {
-    get { return maxDistanceToTargetToMove; }
-  }
-
-  public float GetMovementSpeed
-  {
-    get { return movementSpeed; }
   }
 }

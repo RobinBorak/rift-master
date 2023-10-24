@@ -18,7 +18,7 @@ public class CurrentRiftLogic : MonoBehaviour
   {
     currentRift = FindObjectOfType<CurrentRift>();
     statusImage.fillAmount = progress;
-    rift = currentRift.currentRift;
+    rift = currentRift != null ? currentRift.currentRift : 0;
     FindObjectOfType<SelectRift>().SetRift(rift);
     DontDestroyOnLoad(gameObject);
   }
@@ -66,4 +66,11 @@ public class CurrentRiftLogic : MonoBehaviour
     currentRift.SetRiftDefault();
     Invoke("GoBackToTown", 5f);
   }
+
+  //Getters and setters
+  public int Rift
+  {
+    get { return rift; }
+  }
+
 }

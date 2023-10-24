@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6183632339071275728}
   - component: {fileID: 278174047165589093}
   - component: {fileID: 2589423245960711302}
+  - component: {fileID: 8881112327214643188}
   m_Layer: 7
   m_Name: Enemy Player
   m_TagString: Enemy
@@ -196,9 +197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d0cafdf3d1447ca917088e80497d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  maxDistanceToTargetToMove: 10
-  movementSpeed: 1
 --- !u!114 &278174047165589093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +221,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f253d48336c49aaa3d85808b6252c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8881112327214643188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159248791886805315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5d5580f738641ddacb934e79f94813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  movementSpeed: 3
+  maxDistanceToTargetToMove: 10
+  attackSpeed: 1.5
+  attackRange: 1.5
 --- !u!1 &7868819982513541976
 GameObject:
   m_ObjectHideFlags: 0
