@@ -6,22 +6,23 @@ public class SelectRift : MonoBehaviour
 {
   [SerializeField] private int rift = 0;
   List<string> mapNames = new List<string>();
+  private CurrentRift currentRift;
 
   private void Start()
   {
     mapNames = LoadMapNames();
+    currentRift = FindObjectOfType<CurrentRift>();
   }
   //onclick
   public void LoadRift()
   {
-    Debug.Log("LoadRift");
-    // Load scene
+    Debug.Log("Rift " + rift + " started");
+    currentRift.currentRift = rift;
     LoadMap();
   }
 
   private void LoadMap()
   {
-    Debug.Log("LoadMap");
     // Load scene
     UnityEngine.SceneManagement.SceneManager.LoadScene(GetRandomMap());
   }
@@ -43,7 +44,13 @@ public class SelectRift : MonoBehaviour
     if (other.tag == "Player")
     {
       //Based on last rift, load next map
+      Debug.Log("Continuing to next map for rift " + rift);
       LoadMap();
     }
+  }
+
+  public void SetRift(int rift)
+  {
+    this.rift = rift;
   }
 }
