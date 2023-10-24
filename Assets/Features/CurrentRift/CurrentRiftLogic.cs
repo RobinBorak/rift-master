@@ -64,7 +64,7 @@ public class CurrentRiftLogic : MonoBehaviour
 
   public void IncreaseSmallProgress()
   {
-    IncreaseProgress(80f);
+    IncreaseProgress(10f);
   }
 
   public void DecreaseSmallProgress()

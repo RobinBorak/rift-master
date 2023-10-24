@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
   void Start()
   {
     Reset();
+    SetAnimationSpeed();
   }
 
   private void Reset()
@@ -79,6 +80,13 @@ public class Player : MonoBehaviour
     {
       PlaceAtStartPosition();
     }
+  }
+
+
+  private void SetAnimationSpeed()
+  {
+    Animator anim = gameObject.GetComponent<Animator>();
+    anim.speed = playerStats.attackSpeed / 2;
   }
 
 }

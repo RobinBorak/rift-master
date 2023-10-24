@@ -30,13 +30,16 @@ public class PlayerCombat : MonoBehaviour
 
   private void Swing()
   {
+    Invoke("SwingDmg", playerStats.attackSpeed / 2);
+    Invoke("ResetIsAttacking", playerStats.attackSpeed);
+  }
+  private void SwingDmg()
+  {
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.attackRange, LayerMask.GetMask("Enemy"));
     foreach (Collider2D enemy in hitEnemies)
     {
       enemy.GetComponent<Enemy>().TakeDamage(1f, transform);
     }
-
-    Invoke("ResetIsAttacking", playerStats.attackSpeed);
   }
 
   private void ResetIsAttacking()
