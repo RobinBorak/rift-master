@@ -5,31 +5,16 @@ using UnityEngine.UI;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-  private static PlayerHealthBar instance;
-
   [SerializeField] private Image healthBar;
   [SerializeField] private Player player;
   private PlayerStats playerStats;
 
-  void Awake()
-  {
-    if (instance == null)
-    {
-      instance = this;
-      DontDestroyOnLoad(gameObject);
-    }
-    else
-    {
-      Destroy(gameObject);
-    }
-  }
 
   void Start()
   {
     playerStats = player.GetComponent<PlayerStats>();
     Player.playerHealthLossDelegate += UpdateHealthBar;
     Player.playerResetDelegate += Reset;
-    CurrentRiftLogic.currentRiftLogicRiftCompleteDelegate += OnCurrentRiftLogicRiftComplete;
 
     Reset();
   }
@@ -43,18 +28,6 @@ public class PlayerHealthBar : MonoBehaviour
   private void Reset()
   {
     healthBar.fillAmount = 1;
-  }
-
-  private void OnDestroy()
-  {
-    Player.playerHealthLossDelegate -= UpdateHealthBar;
-    Player.playerResetDelegate -= Reset;
-    CurrentRiftLogic.currentRiftLogicRiftCompleteDelegate -= OnCurrentRiftLogicRiftComplete;
-  }
-
-  private void OnCurrentRiftLogicRiftComplete()
-  {
-    Destroy(gameObject);
   }
 
 }

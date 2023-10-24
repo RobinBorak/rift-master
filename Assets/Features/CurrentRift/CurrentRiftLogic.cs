@@ -17,9 +17,6 @@ public class CurrentRiftLogic : MonoBehaviour
   private int timeToComplete = 60;
   private int timeLeft = 0;
 
-  public delegate void CurrentRiftLogicRiftCompleteDelegate();
-  public static event CurrentRiftLogicRiftCompleteDelegate currentRiftLogicRiftCompleteDelegate;
-
   // Start is called before the first frame update
   void Start()
   {
@@ -47,7 +44,7 @@ public class CurrentRiftLogic : MonoBehaviour
     if (timeLeft <= 0)
     {
       Debug.Log("Rift failed, going back to town...");
-      currentRift.SetRiftDefault();
+      FindObjectOfType<CurrentRift>().SetRiftDefault();
       GoBackToTown();
     }
   }
@@ -67,7 +64,7 @@ public class CurrentRiftLogic : MonoBehaviour
 
   public void IncreaseSmallProgress()
   {
-    IncreaseProgress(10f);
+    IncreaseProgress(80f);
   }
 
   public void DecreaseSmallProgress()
@@ -89,7 +86,6 @@ public class CurrentRiftLogic : MonoBehaviour
   private void GoBackToTown()
   {
     UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    currentRiftLogicRiftCompleteDelegate?.Invoke();
     Destroy(gameObject);
   }
 

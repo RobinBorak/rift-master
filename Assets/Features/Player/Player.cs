@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
   {
     if (next.buildIndex == 0)
     {
-      Destroy(gameObject);
+      PlaceAtStartPosition();
     }
     else //if (next.name == "Rift")
     {
