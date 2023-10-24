@@ -21,9 +21,9 @@ public class EnemyCombat : MonoBehaviour
   {
     if (!isAttacking)
     {
+      isAttacking = true;
       anim.SetTrigger("Attack");
       Swing();
-      isAttacking = true;
     }
   }
 

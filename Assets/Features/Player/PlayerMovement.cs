@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-  private float movementSpeed = 5f;
   private PlayerStats playerStats;
 
   private JoystickMovement joystickMovement;

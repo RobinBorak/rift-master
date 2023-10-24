@@ -61,7 +61,7 @@ public class PlayerRiftsStats
   }
 
 
-  public static RiftStats Get(int rift)
+  private static RiftStats Get(int rift)
   {
     if (!isLoaded)
     {

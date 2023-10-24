@@ -6,21 +6,48 @@ using UnityEngine.UI;
 public class CurrentRiftLogic : MonoBehaviour
 {
   [SerializeField] private Image statusImage;
+  [SerializeField] private Image timerImage;
   private static CurrentRiftLogic instance;
   private CurrentRift currentRift;
 
   public int rift = 0;
   private float progress = 0;
   private bool complete = false;
+  private int timeToComplete = 60;
+  private int timeLeft = 0;
 
   // Start is called before the first frame update
   void Start()
   {
-    currentRift = FindObjectOfType<CurrentRift>();
+    timeLeft = timeToComplete;
+
     statusImage.fillAmount = progress;
+    timerImage.fillAmount = timeLeft / (float)timeToComplete;
+
+    currentRift = FindObjectOfType<CurrentRift>();
     rift = currentRift != null ? currentRift.currentRift : 0;
     FindObjectOfType<SelectRift>().SetRift(rift);
+
+    InvokeRepeating("UpdateTimeLeft", 1f, 1f);
     DontDestroyOnLoad(gameObject);
+  }
+
+  private void UpdateTimeLeft()
+  {
+    if (complete)
+    {
+      return;
+    }
+
+    timeLeft--;
+    timerImage.fillAmount = timeLeft / (float)timeToComplete;
+    if (timeLeft <= 0)
+    {
+      Debug.Log("Rift failed, going back to town...");
+      currentRift.SetRiftDefault();
+      GoBackToTown();
+    }
+    Debug.Log("Time left: " + timeLeft);
   }
 
   void Awake()
@@ -38,6 +65,11 @@ public class CurrentRiftLogic : MonoBehaviour
   public void IncreaseSmallProgress()
   {
     IncreaseProgress(10f);
+  }
+
+  public void DecreaseSmallProgress()
+  {
+    IncreaseProgress(-10f);
   }
 
   private void IncreaseProgress(float amount)
@@ -61,7 +93,7 @@ public class CurrentRiftLogic : MonoBehaviour
   {
     Debug.Log("Rift complete, going back to town...");
     complete = true;
-    PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true));
+    PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true, timeToComplete - timeLeft));
     PlayerRiftsStats.SaveRiftsStats();
     currentRift.SetRiftDefault();
     Invoke("GoBackToTown", 5f);

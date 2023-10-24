@@ -6,8 +6,15 @@ public class Player : MonoBehaviour
 {
   private PlayerStats playerStats;
   private float currentHealth;
+  private CurrentRiftLogic currentRiftLogic;
   // Start is called before the first frame update
   void Start()
+  {
+    currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
+    Reset();
+  }
+
+  private void Reset()
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
     currentHealth = playerStats.maxHealth;
@@ -24,6 +31,12 @@ public class Player : MonoBehaviour
 
   private void Die()
   {
+    Debug.Log("Player died");
+    //Find RespawnPosition by name
+    Transform respawnPosition = GameObject.Find("RespawnPosition").transform;
+    transform.position = respawnPosition.position;
+    currentRiftLogic.DecreaseSmallProgress();
+    Reset();
   }
 
 }

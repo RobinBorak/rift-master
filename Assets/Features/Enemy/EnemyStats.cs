@@ -22,7 +22,6 @@ public class EnemyStats : MonoBehaviour
   private void ScaleWithRift(int riftLevel = 1)
   {
     maxHealth *= riftLevel * 0.6f;
-    attackSpeed *= riftLevel * 0.6f;
   }
 
 }
