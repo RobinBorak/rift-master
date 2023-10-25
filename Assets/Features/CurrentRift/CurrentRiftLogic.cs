@@ -16,6 +16,7 @@ public class CurrentRiftLogic : MonoBehaviour
   private bool complete = false;
   private int timeToComplete = 60;
   private int timeLeft = 0;
+  private int expForRiftCompletion = 50;
 
   // Start is called before the first frame update
   void Start()
@@ -85,6 +86,7 @@ public class CurrentRiftLogic : MonoBehaviour
 
   private void GoBackToTown()
   {
+    FindObjectOfType<PlayerStats>().Save();
     UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     Destroy(gameObject);
   }
@@ -96,6 +98,7 @@ public class CurrentRiftLogic : MonoBehaviour
     PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true, timeToComplete - timeLeft));
     PlayerRiftsStats.SaveRiftsStats();
     currentRift.SetRiftDefault();
+    FindObjectOfType<Player>().GainExp(expForRiftCompletion);
     Invoke("GoBackToTown", 1f);
   }
 
