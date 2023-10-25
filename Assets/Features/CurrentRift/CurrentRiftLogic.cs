@@ -96,7 +96,7 @@ public class CurrentRiftLogic : MonoBehaviour
     PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true, timeToComplete - timeLeft));
     PlayerRiftsStats.SaveRiftsStats();
     currentRift.SetRiftDefault();
-    Invoke("GoBackToTown", 5f);
+    Invoke("GoBackToTown", 1f);
   }
 
   //Getters and setters

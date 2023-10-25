@@ -11,4 +11,8 @@ public class PlayerStats : MonoBehaviour
   public float attackSpeed = 1f;
   public float attackRange = 1f;
 
+  [Header("Exp")]
+  public int level = 1;
+  public int currentExp = 0;
+
 }

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
   private static Player instance;
 
   private PlayerStats playerStats;
+  private int currentExpStage;
 
   public float currentHealth;
   public delegate void PlayerHealthLossDelegate(float damage);
@@ -15,6 +16,12 @@ public class Player : MonoBehaviour
 
   public delegate void PlayerResetDelegate();
   public static event PlayerResetDelegate playerResetDelegate;
+
+  public delegate void PlayerExpUpdateDelegate(int exp);
+  public static event PlayerExpUpdateDelegate playerExpUpdateDelegate;
+
+  public delegate void PlayerLevelUpDelegate();
+  public static event PlayerLevelUpDelegate playerLevelUpDelegate;
 
   void Awake()
   {
@@ -38,6 +45,7 @@ public class Player : MonoBehaviour
   private void Reset()
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
+    currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
     currentHealth = playerStats.maxHealth;
     playerResetDelegate?.Invoke();
     SceneManager.activeSceneChanged += OnSceneChanged;
@@ -89,4 +97,23 @@ public class Player : MonoBehaviour
     anim.speed = playerStats.attackSpeed / 2;
   }
 
+
+  public void GainExp(int exp)
+  {
+    playerStats.currentExp += exp;
+    playerExpUpdateDelegate?.Invoke(playerStats.currentExp);
+
+    if(playerStats.currentExp >= currentExpStage)
+    {
+      LevelUp();
+    }
+  }
+
+  private void LevelUp()
+  {
+    playerStats.level++;
+    playerStats.currentExp = 0;
+    currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
+    playerLevelUpDelegate?.Invoke();
+  }
 }

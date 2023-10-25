@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
   }
   private void Die()
   {
+    FindObjectOfType<Player>().GetComponent<Player>()?.GainExp(enemyStats.exp);
     FindObjectOfType<CurrentRiftLogic>()?.IncreaseSmallProgress();
     Destroy(gameObject);
   }

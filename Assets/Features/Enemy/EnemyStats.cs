@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EnemyStats : MonoBehaviour
   [Header("Combat")]
   public float attackSpeed = 1.5f;
   public float attackRange = 1.5f;
+
+  [NonSerialized] public int exp = 5;
 
   // Scale stats before Start() is called in other scripts
   void Awake()
