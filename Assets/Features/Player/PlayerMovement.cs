@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
   private Vector2 moveDirection;
   private Vector2 lastMoveDirection;
 
+  private bool isDashing = false;
+  private bool isDashingCooldown = false;
+
   private Animator animator;
   private Rigidbody2D rb;
 
@@ -42,7 +45,10 @@ public class PlayerMovement : MonoBehaviour
     {
       lastMoveDirection = moveDirection;
     }
-    rb.velocity = new Vector2(moveDirection.x * playerStats.movementSpeed, moveDirection.y * playerStats.movementSpeed);
+    if (!isDashing)
+    {
+      rb.velocity = new Vector2(moveDirection.x * playerStats.movementSpeed, moveDirection.y * playerStats.movementSpeed);
+    }
   }
 
   private void Animate()
@@ -52,5 +58,28 @@ public class PlayerMovement : MonoBehaviour
     animator.SetFloat("AnimLastMoveX", lastMoveDirection.x);
     animator.SetFloat("AnimLastMoveY", lastMoveDirection.y);
     animator.SetBool("AnimIsMoving", rb.velocity.magnitude > 0);
+  }
+
+  public void Dash()
+  {
+    if (isDashingCooldown)
+    {
+      return;
+    }
+    Debug.Log("Dash");
+    isDashing = true;
+    rb.velocity = new Vector2(lastMoveDirection.x * 10, lastMoveDirection.y * 10);
+    Invoke("StopDashing", 0.2f);
+    Invoke("ResetDashingCooldown", 1f);
+  }
+
+  private void StopDashing()
+  {
+    isDashing = false;
+  }
+
+  private void ResetDashingCooldown()
+  {
+    isDashingCooldown = false;
   }
 }
