@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
   private int currentExpStage;
 
   public float currentHealth;
-  public delegate void PlayerHealthLossDelegate(float damage);
+  public delegate void PlayerHealthLossDelegate();
   public static event PlayerHealthLossDelegate playerHealthLossDelegate;
 
   public delegate void PlayerResetDelegate();
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     }
     else
     {
-      playerHealthLossDelegate?.Invoke(damage);
+      playerHealthLossDelegate?.Invoke();
     }
   }
 

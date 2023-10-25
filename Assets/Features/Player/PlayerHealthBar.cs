@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealthBar : MonoBehaviour
 {
   [SerializeField] private Image healthBar;
   [SerializeField] private Player player;
+  [SerializeField] private TextMeshProUGUI healthText;
   private PlayerStats playerStats;
 
 
@@ -14,20 +16,15 @@ public class PlayerHealthBar : MonoBehaviour
   {
     playerStats = player.GetComponent<PlayerStats>();
     Player.playerHealthLossDelegate += UpdateHealthBar;
-    Player.playerResetDelegate += Reset;
+    Player.playerResetDelegate += UpdateHealthBar;
 
-    Reset();
+    UpdateHealthBar();
   }
 
-  private void UpdateHealthBar(float damage)
+  private void UpdateHealthBar()
   {
-    Debug.Log("Updating health bar " + player.currentHealth + " / " + playerStats.maxHealth + " = " + player.currentHealth / playerStats.maxHealth);
     healthBar.fillAmount = player.currentHealth / playerStats.maxHealth;
-  }
-
-  private void Reset()
-  {
-    healthBar.fillAmount = 1;
+    healthText.text = player.currentHealth.ToString() + " / " + playerStats.maxHealth.ToString();
   }
 
 }

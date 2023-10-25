@@ -489,6 +489,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &629032722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7065445233870818284, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
+  m_PrefabInstance: {fileID: 1018978012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &709312580
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,17 +608,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5505836156513663301, guid: d298883ea5c0f4db9b1aeeb07e34123e, type: 3}
   m_PrefabInstance: {fileID: 727299060}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &819566772 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6734835732610362353, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
-  m_PrefabInstance: {fileID: 1018978012}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &894333752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -802,21 +802,17 @@ PrefabInstance:
       value: OverlayCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 5401056820416677009, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
-      propertyPath: levelText
-      value: 
-      objectReference: {fileID: 819566772}
-    - target: {fileID: 5401056820416677009, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
       propertyPath: playerStats
       value: 
       objectReference: {fileID: 1351986185}
-    - target: {fileID: 6572892028997978143, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1351986183}
     - target: {fileID: 7887696983384271908, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1351986183}
+    - target: {fileID: 7887696983384271908, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 629032722}
     - target: {fileID: 8425833149773018142, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -897,8 +893,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6572892028997978143, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
