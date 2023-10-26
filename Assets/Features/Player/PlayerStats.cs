@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
   private static PlayerStats instance;
   private static string key = "PlayerStats";
   private SerializedPlayerStats serializedPlayerStats;
+  private PlayerTalents playerTalents;
 
   public float maxHealth = 5f;
   public float movementSpeed = 5f;
@@ -26,7 +27,8 @@ public class PlayerStats : MonoBehaviour
     {
       instance = this;
       DontDestroyOnLoad(gameObject);
-      SerializedPlayerStats serializedPlayerStats = (SerializedPlayerStats)Store.Load(key);
+      playerTalents = FindObjectOfType<PlayerTalents>();
+      serializedPlayerStats = (SerializedPlayerStats)Store.Load(key);
 
       if (serializedPlayerStats != null)
       {
@@ -37,11 +39,25 @@ public class PlayerStats : MonoBehaviour
         level = serializedPlayerStats.level;
         currentExp = serializedPlayerStats.currentExp;
       }
+      else
+      {
+        serializedPlayerStats = new SerializedPlayerStats(this);
+      }
+
+      PlayerTalents.onTalentsChangedCallback += CalculateStatsWithTalents;
+      CalculateStatsWithTalents();
+
+
     }
     else
     {
       Destroy(gameObject);
     }
+  }
+
+  public void CalculateStatsWithTalents()
+  {
+    maxHealth = serializedPlayerStats.maxHealth + (float)playerTalents.GetTalentPoints(1);
   }
 
   public void Save()

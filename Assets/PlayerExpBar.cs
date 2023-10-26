@@ -8,17 +8,22 @@ public class PlayerExpBar : MonoBehaviour
 {
   [SerializeField] private Image expBar;
   [SerializeField] private TextMeshProUGUI levelText;
+  [SerializeField] private GameObject levelIconContainer;
   [SerializeField] private PlayerStats playerStats;
+  private PlayerTalents playerTalents;
   private ExpStages expStages;
   private int currentLevel;
   private int currentExpStage;
 
   void Start()
   {
+    playerTalents = FindObjectOfType<PlayerTalents>();
     currentLevel = playerStats.level;
     currentExpStage = new ExpStages().GetExpStage(currentLevel + 1);
     levelText.text = currentLevel.ToString();
 
+    BlinkLevelIconWhenAvailableTalentPoints();
+    PlayerTalents.onTalentsChangedCallback += BlinkLevelIconWhenAvailableTalentPoints;
     Player.playerExpUpdateDelegate += UpdateExpBar;
     Player.playerLevelUpDelegate += LevelUp;
     UpdateExpBar(0);
@@ -35,6 +40,16 @@ public class PlayerExpBar : MonoBehaviour
     currentLevel = playerStats.level;
     levelText.text = currentLevel.ToString();
     expBar.fillAmount = 0;
+    BlinkLevelIconWhenAvailableTalentPoints();
+  }
+
+
+  private void BlinkLevelIconWhenAvailableTalentPoints()
+  {
+    levelIconContainer.GetComponent<Animator>().SetBool(
+      "Blink",
+      playerTalents.availableTalentPoints > 0
+    );
   }
 
 }

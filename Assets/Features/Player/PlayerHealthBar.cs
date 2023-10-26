@@ -17,6 +17,7 @@ public class PlayerHealthBar : MonoBehaviour
     playerStats = player.GetComponent<PlayerStats>();
     Player.playerHealthLossDelegate += UpdateHealthBar;
     Player.playerResetDelegate += UpdateHealthBar;
+    PlayerTalents.onTalentsChangedCallback += UpdateHealthBar;
 
     UpdateHealthBar();
   }
