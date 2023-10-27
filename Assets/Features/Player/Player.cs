@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
     currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
-    currentHealth = playerStats.maxHealth;
+    currentHealth = playerStats.MaxHealth;
     playerResetDelegate?.Invoke();
     SceneManager.activeSceneChanged += OnSceneChanged;
   }

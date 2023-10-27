@@ -9,16 +9,16 @@ public class PlayerStats : MonoBehaviour
   private SerializedPlayerStats serializedPlayerStats;
   private PlayerTalents playerTalents;
 
-  public float maxHealth = 5f;
-  public float movementSpeed = 5f;
+  private float maxHealth;
+  public float movementSpeed;
 
   [Header("Combat")]
-  public float attackSpeed = 1f;
-  public float attackRange = 1f;
+  public float attackSpeed;
+  public float attackRange;
 
   [Header("Exp")]
-  public int level = 1;
-  public int currentExp = 0;
+  public int level;
+  public int currentExp;
 
 
   void Awake()
@@ -30,23 +30,15 @@ public class PlayerStats : MonoBehaviour
       playerTalents = FindObjectOfType<PlayerTalents>();
       serializedPlayerStats = (SerializedPlayerStats)Store.Load(key);
 
-      if (serializedPlayerStats != null)
-      {
-        maxHealth = serializedPlayerStats.maxHealth;
-        movementSpeed = serializedPlayerStats.movementSpeed;
-        attackSpeed = serializedPlayerStats.attackSpeed;
-        attackRange = serializedPlayerStats.attackRange;
-        level = serializedPlayerStats.level;
-        currentExp = serializedPlayerStats.currentExp;
-      }
-      else
-      {
-        serializedPlayerStats = new SerializedPlayerStats(this);
-      }
+      if (serializedPlayerStats == null)
+        serializedPlayerStats = new SerializedPlayerStats();
 
-      PlayerTalents.onTalentsChangedCallback += CalculateStatsWithTalents;
-      CalculateStatsWithTalents();
-
+      maxHealth = serializedPlayerStats.maxHealth;
+      movementSpeed = serializedPlayerStats.movementSpeed;
+      attackSpeed = serializedPlayerStats.attackSpeed;
+      attackRange = serializedPlayerStats.attackRange;
+      level = serializedPlayerStats.level;
+      currentExp = serializedPlayerStats.currentExp;
 
     }
     else
@@ -55,14 +47,21 @@ public class PlayerStats : MonoBehaviour
     }
   }
 
-  public void CalculateStatsWithTalents()
-  {
-    maxHealth = serializedPlayerStats.maxHealth + (float)playerTalents.GetTalentPoints(1);
-  }
-
   public void Save()
   {
-    Store.Save(key, new SerializedPlayerStats(this));
+    Store.Save(key, new SerializedPlayerStats(
+      maxHealth,
+      movementSpeed,
+      attackSpeed,
+      attackRange,
+      level,
+      currentExp
+    ));
   }
 
+  //Getters and Setters
+  public float MaxHealth
+  {
+    get { return maxHealth + (float)playerTalents.GetTalentPoints(1); }
+  }
 }

@@ -11,17 +11,28 @@ public class SerializedPlayerStats
   public float attackSpeed = 1f;
   public float attackRange = 1f;
 
-  public int level = 1;
-  public int currentExp = 0;
+  public int level = 2;
+  public int currentExp = 50;
 
-  public SerializedPlayerStats(PlayerStats playerStats)
+  public SerializedPlayerStats(
+    float maxHealth,
+    float movementSpeed,
+    float attackSpeed,
+    float attackRange,
+    int level,
+    int currentExp
+  )
   {
-    maxHealth = playerStats.maxHealth;
-    movementSpeed = playerStats.movementSpeed;
-    attackSpeed = playerStats.attackSpeed;
-    attackRange = playerStats.attackRange;
-    level = playerStats.level;
-    currentExp = playerStats.currentExp;
+    this.maxHealth = maxHealth;
+    this.movementSpeed = movementSpeed;
+    this.attackSpeed = attackSpeed;
+    this.attackRange = attackRange;
+    this.level = level;
+    this.currentExp = currentExp;
+  }
+
+  public SerializedPlayerStats()
+  {
   }
 
 }
