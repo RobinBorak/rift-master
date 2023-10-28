@@ -6,26 +6,22 @@ using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 public class PlayerCombat : MonoBehaviour
 {
 
-  private Character4D Character;
+  private Character4D character;
   private PlayerStats playerStats;
   private Animator anim;
   private bool isAttacking = false;
 
-  private Transform attackPoint;
-
   private void Start()
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
-    Character = gameObject.GetComponent<Character4D>();
-    //attackPoint = transform.Find("AttackPoint").transform;
-    attackPoint = transform;
+    character = gameObject.GetComponent<Character4D>();
   }
 
   public void Attack()
   {
     if (!isAttacking)
     {
-      Character.AnimationManager.Slash(twoHanded: false);
+      character.AnimationManager.Slash(twoHanded: false);
       Swing();
       isAttacking = true;
     }
@@ -38,6 +34,7 @@ public class PlayerCombat : MonoBehaviour
   }
   private void SwingDmg()
   {
+    Transform attackPoint = GameObject.Find("PrimaryWeapon").transform;
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.attackRange, LayerMask.GetMask("Enemy"));
     foreach (Collider2D enemy in hitEnemies)
     {

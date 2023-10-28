@@ -6,7 +6,7 @@ using UnityEngine;
 public class SerializedPlayerStats
 {
   public float maxHealth = 5f;
-  public float movementSpeed = 5f;
+  public float movementSpeed = 3f;
 
   public float attackSpeed = 1f;
   public float attackRange = 1f;
