@@ -9,7 +9,7 @@ public class DashButton : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+    playerMovement = FindObjectOfType<PlayerMovement>();
     InitDashButton();
   }
 

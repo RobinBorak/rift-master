@@ -9,7 +9,7 @@ public class PlayerExpBar : MonoBehaviour
   [SerializeField] private Image expBar;
   [SerializeField] private TextMeshProUGUI levelText;
   [SerializeField] private GameObject levelIconContainer;
-  [SerializeField] private PlayerStats playerStats;
+  private PlayerStats playerStats;
   private PlayerTalents playerTalents;
   private ExpStages expStages;
   private int currentLevel;
@@ -18,6 +18,7 @@ public class PlayerExpBar : MonoBehaviour
   void Start()
   {
     playerTalents = FindObjectOfType<PlayerTalents>();
+    playerStats = FindObjectOfType<PlayerStats>();
     currentLevel = playerStats.level;
     currentExpStage = new ExpStages().GetExpStage(currentLevel + 1);
     levelText.text = currentLevel.ToString();

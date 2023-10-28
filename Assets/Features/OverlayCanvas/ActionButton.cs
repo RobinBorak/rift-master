@@ -9,7 +9,7 @@ public class ActionButton : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    playerCombat = GameObject.Find("Player").GetComponent<PlayerCombat>();
+    playerCombat = FindObjectOfType<PlayerCombat>();
     InitAttackButton();
   }
 

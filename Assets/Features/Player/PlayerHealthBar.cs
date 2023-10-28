@@ -7,13 +7,14 @@ using TMPro;
 public class PlayerHealthBar : MonoBehaviour
 {
   [SerializeField] private Image healthBar;
-  [SerializeField] private Player player;
   [SerializeField] private TextMeshProUGUI healthText;
+  private Player player;
   private PlayerStats playerStats;
 
 
   void Start()
   {
+    player = FindObjectOfType<Player>();
     playerStats = player.GetComponent<PlayerStats>();
     Player.playerHealthLossDelegate += UpdateHealthBar;
     Player.playerResetDelegate += UpdateHealthBar;

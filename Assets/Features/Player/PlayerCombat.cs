@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 
 public class PlayerCombat : MonoBehaviour
 {
 
+  private Character4D Character;
   private PlayerStats playerStats;
   private Animator anim;
   private bool isAttacking = false;
@@ -14,15 +16,16 @@ public class PlayerCombat : MonoBehaviour
   private void Start()
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
-    anim = gameObject.GetComponent<Animator>();
-    attackPoint = transform.Find("AttackPoint").transform;
+    Character = gameObject.GetComponent<Character4D>();
+    //attackPoint = transform.Find("AttackPoint").transform;
+    attackPoint = transform;
   }
 
   public void Attack()
   {
     if (!isAttacking)
     {
-      anim.SetTrigger("Attack");
+      Character.AnimationManager.Slash(twoHanded: false);
       Swing();
       isAttacking = true;
     }

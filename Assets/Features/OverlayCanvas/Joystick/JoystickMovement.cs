@@ -19,7 +19,7 @@ public class JoystickMovement : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    canvasZero = GameObject.Find("Player").transform;
+    canvasZero = FindObjectOfType<Player>().transform;
     joystickOriginalPos = joystickBg.transform.localPosition;
     joystickRadius = joystickBg.GetComponent<RectTransform>().sizeDelta.y / 4;
 
