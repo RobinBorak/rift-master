@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  private static PlayerInventory instance;
+  private int gold = 0;
 
-    // Update is called once per frame
-    void Update()
+  public delegate void OnGoldChangeDelegate(int gold);
+  public static event OnGoldChangeDelegate onGoldChangeDelegate;
+
+  void Awake()
+  {
+    if (instance == null)
     {
-        
+      instance = this;
+      DontDestroyOnLoad(gameObject);
     }
+    else
+    {
+      Destroy(gameObject);
+    }
+  }
+
+
+  public void AddGold(int amount)
+  {
+    gold += amount;
+    onGoldChangeDelegate?.Invoke(amount);
+  }
+
+  //Getters and Setters
+  public int Gold
+  {
+    get { return gold; }
+  }
+
 }

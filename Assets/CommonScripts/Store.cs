@@ -9,7 +9,6 @@ public class Store
 
   public static void Save(string key, object value)
   {
-    Debug.Log("Saving " + key + "...");
     BinaryFormatter bf = new BinaryFormatter();
     FileStream file = File.Create(Application.persistentDataPath + "/" + key + ".gd");
     bf.Serialize(file, value);
@@ -18,10 +17,8 @@ public class Store
 
   public static object Load(string key)
   {
-    Debug.Log("Load " + key + " from file");
     if (File.Exists(Application.persistentDataPath + "/" + key + ".gd"))
     {
-      Debug.Log("File exists");
       BinaryFormatter bf = new BinaryFormatter();
       FileStream file = File.Open(Application.persistentDataPath + "/" + key + ".gd", FileMode.Open);
       object value = bf.Deserialize(file);
