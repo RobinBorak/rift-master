@@ -10,6 +10,9 @@ public class Loot : MonoBehaviour
   {
     if (Item.Name == "Gold")
       gameObject.tag = "Gold";
+
+    if (Item.Name == "Helmet")
+      transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
   }
 
   // Update is called once per frame

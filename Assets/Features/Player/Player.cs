@@ -131,4 +131,10 @@ public class Player : MonoBehaviour
     currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
     playerLevelUpDelegate?.Invoke();
   }
+
+
+  public Character4D TestGetCharacter4D()
+  {
+    return character;
+  }
 }

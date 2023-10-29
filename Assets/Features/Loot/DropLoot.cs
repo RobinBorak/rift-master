@@ -13,8 +13,16 @@ public class DropLoot : MonoBehaviour
   {
     //lootPrefab = Resources.Load<GameObject>("Features/Loot/LootPrefab");
     lootSpawnPoint = gameObject.transform;
-    Enemy enemy = gameObject.GetComponent<Enemy>();
-    enemy.onDeathDelegate += DropLootOnDeath;
+    if (gameObject.CompareTag("Enemy"))
+    {
+      Enemy enemy = gameObject.GetComponent<Enemy>();
+      enemy.onDeathDelegate += DropLootOnDeath;
+    }
+    else if (gameObject.CompareTag("Chest"))
+    {
+      Chest chest = gameObject.GetComponent<Chest>();
+      chest.onChestOpenDelegate += DropLootOnDeath;
+    }
   }
 
   private void DropLootOnDeath()
@@ -22,7 +30,10 @@ public class DropLoot : MonoBehaviour
     List<LootItem> loot = lootTable.GetLoot();
     foreach (LootItem item in loot)
     {
-      GameObject lootObject = Instantiate(lootPrefab, GetRandomPosition(), Quaternion.identity);
+      // if item == Helmet, spawn on position 67, -123
+      Vector3 position = item.Name == "Helmet" ? new Vector3(67, -123, 0) : GetRandomPosition();
+
+      GameObject lootObject = Instantiate(lootPrefab, position, Quaternion.identity);
       //Find image child
       lootObject.GetComponentInChildren<SpriteRenderer>().sprite = item.Sprite;
       lootObject.GetComponent<Loot>().Item = item;
@@ -34,6 +45,9 @@ public class DropLoot : MonoBehaviour
     Vector3 randomPosition = Random.insideUnitSphere * lootSpawnRadius;
     randomPosition += lootSpawnPoint.position;
     randomPosition.y = lootSpawnPoint.position.y;
+
+    //Make sure randomPosition is on the grid Floor
+
     return randomPosition;
   }
 

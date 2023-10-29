@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class SerializedPlayerStats
 {
-  public int level = 2;
-  public int currentExp = 50;
+  public int level = 1;
+  public int currentExp = 0;
 
   public SerializedPlayerStats(
     int level,
