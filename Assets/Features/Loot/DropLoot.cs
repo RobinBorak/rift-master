@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DropLoot : MonoBehaviour
+{
+  [SerializeField] private LootTable lootTable;
+  [SerializeField] private GameObject lootPrefab;
+  private Transform lootSpawnPoint;
+  private float lootSpawnRadius = 1f;
+
+  private void Start()
+  {
+    //lootPrefab = Resources.Load<GameObject>("Features/Loot/LootPrefab");
+    lootSpawnPoint = gameObject.transform;
+    Enemy enemy = gameObject.GetComponent<Enemy>();
+    enemy.onDeathDelegate += DropLootOnDeath;
+  }
+
+  private void DropLootOnDeath()
+  {
+    List<LootItem> loot = lootTable.GetLoot();
+    foreach (LootItem item in loot)
+    {
+      GameObject lootObject = Instantiate(lootPrefab, GetRandomPosition(), Quaternion.identity);
+      //Find image child
+      lootObject.GetComponentInChildren<SpriteRenderer>().sprite = item.Sprite;
+      lootObject.GetComponent<Loot>().Item = item;
+    }
+  }
+
+  private Vector3 GetRandomPosition()
+  {
+    Vector3 randomPosition = Random.insideUnitSphere * lootSpawnRadius;
+    randomPosition += lootSpawnPoint.position;
+    randomPosition.y = lootSpawnPoint.position.y;
+    return randomPosition;
+  }
+
+}

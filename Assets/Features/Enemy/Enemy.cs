@@ -8,12 +8,18 @@ public class Enemy : MonoBehaviour
 
   private float currentHealth;
   private Rigidbody2D rb;
+
+  public delegate void OnDeathDelegate();
+  public OnDeathDelegate onDeathDelegate;
+
   // Start is called before the first frame update
   void Start()
   {
     enemyStats = gameObject.GetComponent<EnemyStats>();
-    currentHealth = enemyStats.maxHealth;
     rb = gameObject.GetComponent<Rigidbody2D>();
+
+
+    currentHealth = enemyStats.maxHealth;
   }
 
   // Update is called once per frame
@@ -38,6 +44,7 @@ public class Enemy : MonoBehaviour
   {
     FindObjectOfType<Player>().GetComponent<Player>()?.GainExp(enemyStats.exp);
     FindObjectOfType<CurrentRiftLogic>()?.IncreaseSmallProgress();
+    onDeathDelegate?.Invoke();
     Destroy(gameObject);
   }
 }

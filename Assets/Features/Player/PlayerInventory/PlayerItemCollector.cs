@@ -9,7 +9,7 @@ public class PlayerItemCollector : MonoBehaviour
   {
     if (collision.gameObject.CompareTag("Gold"))
     {
-      int gold = collision.gameObject.GetComponent<Coins>().Value;
+      int gold = collision.gameObject.GetComponent<Loot>().Item.Quantity;
       FindObjectOfType<PlayerInventory>().AddGold(gold);
       Destroy(collision.gameObject);
     }
