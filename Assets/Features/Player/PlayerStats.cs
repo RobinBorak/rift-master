@@ -9,12 +9,12 @@ public class PlayerStats : MonoBehaviour
   private SerializedPlayerStats serializedPlayerStats;
   private PlayerTalents playerTalents;
 
-  private float maxHealth;
-  public float movementSpeed;
+  private float maxHealth = 5f;
+  public float movementSpeed = 3f;
 
   [Header("Combat")]
-  public float attackSpeed;
-  public float attackRange;
+  public float attackSpeed = 1f;
+  public float attackRange = 1f;
 
   [Header("Exp")]
   public int level;
@@ -33,10 +33,6 @@ public class PlayerStats : MonoBehaviour
       if (serializedPlayerStats == null)
         serializedPlayerStats = new SerializedPlayerStats();
 
-      maxHealth = serializedPlayerStats.maxHealth;
-      movementSpeed = serializedPlayerStats.movementSpeed;
-      attackSpeed = serializedPlayerStats.attackSpeed;
-      attackRange = serializedPlayerStats.attackRange;
       level = serializedPlayerStats.level;
       currentExp = serializedPlayerStats.currentExp;
 
@@ -50,10 +46,6 @@ public class PlayerStats : MonoBehaviour
   public void Save()
   {
     Store.Save(key, new SerializedPlayerStats(
-      maxHealth,
-      movementSpeed,
-      attackSpeed,
-      attackRange,
       level,
       currentExp
     ));
