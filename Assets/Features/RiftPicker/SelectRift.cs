@@ -5,12 +5,15 @@ using UnityEngine;
 public class SelectRift : MonoBehaviour
 {
   [SerializeField] private int rift = 0;
-  List<string> mapNames = new List<string>();
+  // Consider changing to buildIndexes
+  List<string> mapNames = new List<string>{
+    "level 1 (Sandstone)",
+    "level 2 (RPGW_Cave)"
+  };
   private CurrentRift currentRift;
 
   private void Start()
   {
-    mapNames = LoadMapNames();
     currentRift = FindObjectOfType<CurrentRift>();
   }
   //onclick
@@ -23,19 +26,12 @@ public class SelectRift : MonoBehaviour
 
   private void LoadMap()
   {
-    UnityEngine.SceneManagement.SceneManager.LoadScene(GetRandomMap());
+    UnityEngine.SceneManagement.SceneManager.LoadScene(GetRandomMapName());
   }
 
-  private int GetRandomMap()
+  private string GetRandomMapName()
   {
-    return Random.Range(1, mapNames.Count);
-  }
-
-  private List<string> LoadMapNames()
-  {
-    List<string> names = new List<string>();
-    names.Add("level 1 (Sandstone)");
-    return names;
+    return mapNames[Random.Range(0, mapNames.Count)];
   }
 
   private void OnTriggerEnter2D(Collider2D other)

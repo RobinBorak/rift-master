@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level 1 (Sandstone).unity
     guid: 759b068dea39348e1ba1733f19e62680
+  - enabled: 1
+    path: Assets/Scenes/level 2 (RPGW_Cave).unity
+    guid: 44a454b4ecf904e4b821ee450abd0fee
   m_configObjects: {}
