@@ -7,7 +7,7 @@ public class DropLoot : MonoBehaviour
   [SerializeField] private LootTable lootTable;
   [SerializeField] private GameObject lootPrefab;
   private Transform lootSpawnPoint;
-  private float lootSpawnRadius = 1f;
+  private float lootSpawnRadius = 2f;
 
   private void Start()
   {

@@ -8,7 +8,9 @@ public class SelectRift : MonoBehaviour
   // Consider changing to buildIndexes
   List<string> mapNames = new List<string>{
     "level 1 (Sandstone)",
-    "level 2 (RPGW_Cave)"
+    "level 2 (RPGW_Cave)",
+    "level 3 (RPGW_Cave)",
+    "level 4 (RPGW_Cave)"
   };
   private CurrentRift currentRift;
 
