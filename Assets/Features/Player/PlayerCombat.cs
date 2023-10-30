@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 
 public class PlayerCombat : MonoBehaviour
@@ -34,7 +35,7 @@ public class PlayerCombat : MonoBehaviour
   }
   private void SwingDmg()
   {
-    Transform attackPoint = GameObject.Find("PrimaryWeapon").transform;
+    Transform attackPoint = transform; //.Find("PrimaryWeapon").transform;
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.attackRange, LayerMask.GetMask("Enemy"));
     foreach (Collider2D enemy in hitEnemies)
     {

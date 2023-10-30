@@ -6,7 +6,7 @@ using System;
 public class EnemyStats : MonoBehaviour
 {
   public float maxHealth = 5f;
-  public float movementSpeed = 3f;
+  public float movementSpeed = 0.5f;
   public float maxDistanceToTargetToMove = 10f;
 
   [Header("Combat")]
@@ -19,7 +19,8 @@ public class EnemyStats : MonoBehaviour
   void Awake()
   {
     CurrentRiftLogic currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
-    ScaleWithRift(currentRiftLogic.rift);
+    if (currentRiftLogic)
+      ScaleWithRift(currentRiftLogic.rift);
   }
 
   private void ScaleWithRift(int riftLevel = 1)

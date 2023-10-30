@@ -1,30 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 
 public class EnemyCombat : MonoBehaviour
 {
   private EnemyStats enemyStats;
+  private Enemy enemy;
+  private Character4D character;
   private Animator anim;
   private bool isAttacking = false;
-
-  private Transform attackPoint;
 
   private void Start()
   {
     enemyStats = gameObject.GetComponent<EnemyStats>();
+    enemy = gameObject.GetComponent<Enemy>();
+    character = gameObject.GetComponent<Character4D>();
     anim = gameObject.GetComponent<Animator>();
-    attackPoint = transform.Find("AttackPoint").transform;
-    SetAnimationSpeed();
   }
 
   public void Attack()
   {
     if (!isAttacking)
     {
-      isAttacking = true;
-      anim.SetTrigger("Attack");
+      character.AnimationManager.Slash(twoHanded: false);
       Swing();
+      isAttacking = true;
     }
   }
 
@@ -36,6 +37,7 @@ public class EnemyCombat : MonoBehaviour
 
   private void SwingDmg()
   {
+    Transform attackPoint = transform; //.Find("PrimaryWeapon").transform;
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, enemyStats.attackRange, LayerMask.GetMask("Player"));
     foreach (Collider2D player in hitEnemies)
     {
@@ -47,12 +49,5 @@ public class EnemyCombat : MonoBehaviour
   {
     isAttacking = false;
   }
-
-  private void SetAnimationSpeed()
-  {
-    Animator anim = gameObject.GetComponent<Animator>();
-    anim.speed = enemyStats.attackSpeed / 2;
-  }
-
 
 }

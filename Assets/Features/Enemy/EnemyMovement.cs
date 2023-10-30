@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -14,9 +16,12 @@ public class EnemyMovement : MonoBehaviour
 
   private float lastMoveX;
   private float lastMoveY;
+  private bool _moving = false;
 
   private float knockbackVelocity = 0f;
   private Transform knockbackFromTarget;
+
+  private Character4D Character;
 
   // Start is called before the first frame update
   void Start()
@@ -27,12 +32,17 @@ public class EnemyMovement : MonoBehaviour
     rb = gameObject.GetComponent<Rigidbody2D>();
     target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     anim = gameObject.GetComponent<Animator>();
+    Character = gameObject.GetComponent<Character4D>();
+
+    Character.AnimationManager.SetState(CharacterState.Idle);
+    Character.SetDirection(Vector2.down);
+
   }
 
   private void FixedUpdate()
   {
     Move(target);
-    Animate();
+    SetDirection();
   }
 
 
@@ -47,8 +57,7 @@ public class EnemyMovement : MonoBehaviour
       lastMoveX = target.position.x - transform.position.x;
       lastMoveY = target.position.y - transform.position.y;
 
-      Vector2 direction = (target.position - transform.position).normalized;
-      velocity = new Vector2(direction.x * enemyStats.movementSpeed, direction.y * enemyStats.movementSpeed);
+      velocity = new Vector2(lastMoveX * enemyStats.movementSpeed, lastMoveY * enemyStats.movementSpeed).normalized;
     }
     else if (
       Vector2.Distance(transform.position, target.position) <= enemyStats.attackRange
@@ -64,6 +73,20 @@ public class EnemyMovement : MonoBehaviour
 
     rb.velocity = velocity;
     EmptyKnockback();
+
+    if (velocity == Vector2.zero)
+    {
+      if (_moving)
+      {
+        _moving = false;
+        Character.AnimationManager.SetState(CharacterState.Idle);
+      }
+    }
+    else
+    {
+      _moving = true;
+      Character.AnimationManager.SetState(CharacterState.Run);
+    }
   }
 
   public void Knockback(Transform position, float force)
@@ -86,13 +109,31 @@ public class EnemyMovement : MonoBehaviour
     knockbackFromTarget = null;
   }
 
-  private void Animate()
+  private void SetDirection()
   {
-    anim.SetFloat("AnimMoveX", rb.velocity.x);
-    anim.SetFloat("AnimMoveY", rb.velocity.y);
-    anim.SetFloat("AnimLastMoveX", lastMoveX);
-    anim.SetFloat("AnimLastMoveY", lastMoveY);
-    anim.SetBool("AnimIsMoving", rb.velocity.magnitude > 0);
+    float _moveX = Mathf.Round(lastMoveX);
+    float _moveY = Mathf.Round(lastMoveY);
+    Vector2 direction = Vector2.zero;
+
+    if (_moveX == -1 && _moveY == 0)
+    {
+      direction += Vector2.left;
+    }
+    else if (_moveX == 1 && _moveY == 0)
+    {
+      direction += Vector2.right;
+    }
+    else if (_moveX == 0 && _moveY == 1)
+    {
+      direction += Vector2.up;
+    }
+    else if (_moveX == 0 && _moveY == -1)
+    {
+      direction += Vector2.down;
+    }
+    else return;
+
+    Character.SetDirection(direction);
   }
 
 }
