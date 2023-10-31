@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour
 {
-  public LootItem Item;
+  public PlayerInventoryItem Item;
+
   // Start is called before the first frame update
   void Start()
   {
-    if (Item.Name == "Gold")
+
+    if (Item.item.name == "Gold")
       gameObject.tag = "Gold";
 
-    if (Item.Name == "Helmet")
+    if (Item.item.name == "Helmet")
       transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
   }
 

@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3ca6004171c41c091aa005661dfb4c, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  lootItems:
-  - {fileID: 11400000, guid: 5279446ea9d154828a6bec6ab93cb507, type: 2}
-  - {fileID: 11400000, guid: 5024b79a98a244befb35d0ab5fccc00f, type: 2}
-  lootItemChances: 6400000064000000
-  lootItemMaxQuantity: 3200000001000000
+  lootItemIds: 010000000200000003000000
+  lootItemChances: 640000006400000064000000
+  lootItemMaxQuantity: 320000000100000064000000

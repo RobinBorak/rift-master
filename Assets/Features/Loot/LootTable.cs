@@ -6,21 +6,27 @@ using UnityEngine;
 [CreateAssetMenu]
 public class LootTable : ScriptableObject
 {
-  public List<LootItem> lootItems = new List<LootItem>();
+  public List<int> lootItemIds = new List<int>();
+  private List<PlayerInventoryItem> lootItems = new List<PlayerInventoryItem>();
   public List<int> lootItemChances = new List<int>();
   public List<int> lootItemMaxQuantity = new List<int>();
 
-  public List<LootItem> GetLoot()
+
+  public List<PlayerInventoryItem> GetLoot()
   {
-    List<LootItem> loot = new List<LootItem>();
-    for (int i = 0; i < lootItems.Count; i++)
+    RiftItems allRiftItems = FindObjectOfType<PlayerInventory>().AllRiftItems;
+    List<PlayerInventoryItem> loot = new List<PlayerInventoryItem>();
+    for (int i = 0; i < lootItemIds.Count; i++)
     {
       int chance = Random.Range(0, 100);
       if (chance < lootItemChances[i])
       {
-        LootItem item = lootItems[i];
-        if (lootItemMaxQuantity[i] > 1)
-          item.Quantity = Random.Range(1, lootItemMaxQuantity[i]);
+        PlayerInventoryItem item = new PlayerInventoryItem(allRiftItems.GetRiftItem(lootItemIds[i]));
+        if (lootItemMaxQuantity[i] > 1){
+          item.item.quantity = Random.Range(1, lootItemMaxQuantity[i]);
+        }else{
+          item.item.quantity = 1;
+        }
         loot.Add(item);
       }
     }

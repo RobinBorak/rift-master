@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088d7098c99064397be4ad2d35a608a3, type: 3}
+  m_Name: AllRiftItems
+  m_EditorClassIdentifier: 
+  riftItems:
+  - {fileID: 11400000, guid: 14eea70906dc149d39c2b3af7a2c05bc, type: 2}
+  - {fileID: 11400000, guid: 8184218380942486cbaa10948c5b1e2b, type: 2}
+  - {fileID: 11400000, guid: 509ad9b4623d94632876948694767262, type: 2}

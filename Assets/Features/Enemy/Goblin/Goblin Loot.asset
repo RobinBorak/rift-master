@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3ca6004171c41c091aa005661dfb4c, type: 3}
   m_Name: Goblin Loot
   m_EditorClassIdentifier: 
-  lootItems:
-  - {fileID: 11400000, guid: 5279446ea9d154828a6bec6ab93cb507, type: 2}
+  lootItemIds: 03000000
   lootItemChances: 14000000
   lootItemMaxQuantity: 0a000000

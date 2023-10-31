@@ -3424,6 +3424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52cc911807cef4482b24d40356894d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllRiftItems: {fileID: 0}
 --- !u!114 &765482107973591048
 MonoBehaviour:
   m_ObjectHideFlags: 0
