@@ -111,23 +111,24 @@ public class EnemyMovement : MonoBehaviour
 
   private void SetDirection()
   {
+    // Round to 1 or -1 or 0
     float _moveX = Mathf.Round(lastMoveX);
     float _moveY = Mathf.Round(lastMoveY);
     Vector2 direction = Vector2.zero;
 
-    if (_moveX == -1 && _moveY == 0)
+    if (_moveX < 0 && _moveY == 0)
     {
       direction += Vector2.left;
     }
-    else if (_moveX == 1 && _moveY == 0)
+    else if (_moveX > 0 && _moveY == 0)
     {
       direction += Vector2.right;
     }
-    else if (_moveX == 0 && _moveY == 1)
+    else if (_moveX == 0 && _moveY > 0)
     {
       direction += Vector2.up;
     }
-    else if (_moveX == 0 && _moveY == -1)
+    else if (_moveX == 0 && _moveY < 0)
     {
       direction += Vector2.down;
     }
