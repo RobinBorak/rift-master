@@ -103,15 +103,12 @@ public class PlayerMovement : MonoBehaviour
   public void Dash()
   {
     if (isDashingCooldown)
-    {
       return;
-    }
-    Debug.Log("Dash");
     isDashing = true;
-    Debug.Log(lastMoveDirection);
+    isDashingCooldown = true;
     rb.velocity = new Vector2(lastMoveDirection.x * 10, lastMoveDirection.y * 10);
     Invoke("StopDashing", 0.2f);
-    Invoke("ResetDashingCooldown", 1f);
+    Invoke("ResetDashingCooldown", 1.5f);
   }
 
   private void StopDashing()
