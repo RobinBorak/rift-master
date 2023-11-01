@@ -15,10 +15,15 @@ public class PlayerExpBar : MonoBehaviour
   private int currentLevel;
   private int currentExpStage;
 
-  void Start()
+  IEnumerator Start()
   {
     playerTalents = FindObjectOfType<PlayerTalents>();
     playerStats = FindObjectOfType<PlayerStats>();
+
+    while (!playerTalents.isDoneLoading){
+      yield return null;
+    }
+
     currentLevel = playerStats.level;
     currentExpStage = new ExpStages().GetExpStage(currentLevel + 1);
     levelText.text = currentLevel.ToString();

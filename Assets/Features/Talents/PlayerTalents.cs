@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerTalents : MonoBehaviour
 {
   private PlayerTalents instance;
+  public bool isDoneLoading = false;
   public List<SelectedTalent> selectedTalents = new List<SelectedTalent>();
   private static string key = "PlayerTalents";
   public int availableTalentPoints = 0;
@@ -37,10 +38,10 @@ public class PlayerTalents : MonoBehaviour
 
   void Start()
   {
+
     playerStats = gameObject.GetComponent<PlayerStats>();
     totalAvailableTalentPoints = playerStats.level;
     availableTalentPoints = totalAvailableTalentPoints - TotalTalentPointsSpent();
-
     Player.playerLevelUpDelegate += () =>
     {
       availableTalentPoints++;
@@ -48,6 +49,7 @@ public class PlayerTalents : MonoBehaviour
       onTalentsChangedCallback.Invoke();
     };
     onTalentsChangedCallback += Save;
+    isDoneLoading = true;
   }
 
   public void AddTalent(int id)
