@@ -10,4 +10,9 @@ public class PlayerInventoryItem
   {
     this.item = item;
   }
+  public PlayerInventoryItem(RiftItem item, int quantity)
+  {
+    this.item = item;
+    this.item.quantity = quantity;
+  }
 }

@@ -11,6 +11,17 @@ public class DisplayPlayerInventory : MonoBehaviour
 
   void OnEnable()
   {
+    Init();
+    PlayerInventory.onItemChangeDelegate += Init;
+  }
+
+  void OnDisable()
+  {
+    PlayerInventory.onItemChangeDelegate -= Init;
+  }
+
+  void Init()
+  {
     Reset();
     playerInventory = FindObjectOfType<PlayerInventory>();
 
@@ -19,7 +30,6 @@ public class DisplayPlayerInventory : MonoBehaviour
       GameObject itemObject = Instantiate(inventoryItemPrefab, transform);
       itemObject.GetComponent<DisplayPlayerInventoryItem>().item = playerInventoryItem.item;
       itemObject.transform.SetParent(grid.transform);
-      Debug.Log("DisplayPlayerInventory: " + playerInventoryItem.item.name + " x" + playerInventoryItem.item.quantity);
     }
   }
 
