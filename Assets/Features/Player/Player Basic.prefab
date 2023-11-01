@@ -3363,6 +3363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6904a0b704294e33adefc4dd1d823b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDoneLoading: 0
   selectedTalents: []
   availableTalentPoints: 0
   totalAvailableTalentPoints: 0

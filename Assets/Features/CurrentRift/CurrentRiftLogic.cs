@@ -18,6 +18,12 @@ public class CurrentRiftLogic : MonoBehaviour
   private int timeLeft = 0;
   private int expForRiftCompletion = 50;
 
+  public delegate void OnRiftComplete();
+  public static event OnRiftComplete onRiftCompleteCallback;
+
+  public delegate void OnRiftFailed();
+  public static event OnRiftFailed onRiftFailedCallback;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -44,9 +50,11 @@ public class CurrentRiftLogic : MonoBehaviour
     timerImage.fillAmount = timeLeft / (float)timeToComplete;
     if (timeLeft <= 0)
     {
-      Debug.Log("Rift failed, going back to town...");
+      onRiftFailedCallback?.Invoke();
       FindObjectOfType<CurrentRift>().SetRiftDefault();
-      GoBackToTown();
+      Invoke("GoBackToTown", 10.5f);
+      complete = true;
+
     }
   }
 
@@ -94,12 +102,13 @@ public class CurrentRiftLogic : MonoBehaviour
   private void Success()
   {
     Debug.Log("Rift complete, going back to town...");
+    onRiftCompleteCallback?.Invoke();
     complete = true;
     PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true, timeToComplete - timeLeft));
     PlayerRiftsStats.SaveRiftsStats();
     currentRift.SetRiftDefault();
     FindObjectOfType<Player>().GainExp(expForRiftCompletion);
-    Invoke("GoBackToTown", 1f);
+    Invoke("GoBackToTown", 10.5f);
   }
 
   //Getters and setters
