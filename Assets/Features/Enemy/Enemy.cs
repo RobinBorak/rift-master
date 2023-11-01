@@ -13,10 +13,14 @@ public class Enemy : MonoBehaviour
   public OnDeathDelegate onDeathDelegate;
 
   // Start is called before the first frame update
-  void Start()
+  IEnumerator Start()
   {
     enemyStats = gameObject.GetComponent<EnemyStats>();
     rb = gameObject.GetComponent<Rigidbody2D>();
+
+    while (!enemyStats.isDoneLoading){
+      yield return null;
+    }
 
     currentHealth = enemyStats.maxHealth;
 

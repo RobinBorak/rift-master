@@ -15,12 +15,16 @@ public class EnemyStats : MonoBehaviour
 
   [NonSerialized] public int exp = 5;
 
+  public bool isDoneLoading = false;
+
   // Scale stats before Start() is called in other scripts
   void Awake()
   {
     CurrentRiftLogic currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
     if (currentRiftLogic)
       ScaleWithRift(currentRiftLogic.rift);
+
+    isDoneLoading = true;
   }
 
   private void ScaleWithRift(int riftLevel = 1)
