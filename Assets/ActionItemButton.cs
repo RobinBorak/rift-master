@@ -10,20 +10,23 @@ public class ActionItemButton : MonoBehaviour
   [SerializeField] private Text count;
   [SerializeField] private int itemId;
 
-  private RiftItem item;
+  private RiftItem inventoryItem;
   private PlayerInventory playerInventory;
   private Player player;
+  private PlayerStats playerStats;
   // Start is called before the first frame update
   void Start()
   {
     player = FindObjectOfType<Player>();
     playerInventory = FindObjectOfType<PlayerInventory>();
-    item = playerInventory.GetInventoryItem(itemId);
-    icon.GetComponent<Image>().sprite = item.icon;
-    count.text = item.quantity.ToString();
-    InitButton();
+    playerStats = FindObjectOfType<PlayerStats>();
+    inventoryItem = playerInventory.GetInventoryItem(itemId);
+    RiftItem item = playerInventory.GetItem(itemId);
 
-    PlayerInventory.onItemChangeDelegate += UpdateItem;
+    icon.GetComponent<Image>().sprite = item.icon;
+    UpdateItemText();
+    InitButton();
+    PlayerInventory.onItemChangeDelegate += UpdateItemText;
   }
 
   private void InitButton()
@@ -38,16 +41,23 @@ public class ActionItemButton : MonoBehaviour
 
   private void UseItem(BaseEventData data)
   {
-    Debug.Log("UseItem :" + item.name);
-    if(item.quantity <= 0) return;
+    if (inventoryItem == null || inventoryItem.quantity <= 0) return;
+    if (player.currentHealth >= playerStats.MaxHealth) return;
     player.Heal(3f);
-    playerInventory.RemoveItem(item.id, 1);
+    playerInventory.RemoveItem(inventoryItem.id, 1);
   }
 
-  private void UpdateItem()
+  private void UpdateItemText()
   {
-    item = playerInventory.GetInventoryItem(itemId);
-    count.text = item.quantity.ToString();
+    inventoryItem = playerInventory.GetInventoryItem(itemId);
+    if (inventoryItem != null)
+    {
+      count.text = inventoryItem.quantity.ToString();
+    }
+    else
+    {
+      count.text = "0";
+    }
   }
 
 }

@@ -19,8 +19,6 @@ public class Enemy : MonoBehaviour
     rb = gameObject.GetComponent<Rigidbody2D>();
 
     currentHealth = enemyStats.maxHealth;
-    Debug.Log("Enemy currentHealth: " + currentHealth);
-    Debug.Log("Enemy maxHealth: " + enemyStats.maxHealth);
 
   }
 

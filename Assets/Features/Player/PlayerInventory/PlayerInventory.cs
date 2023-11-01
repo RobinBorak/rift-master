@@ -127,6 +127,11 @@ public class PlayerInventory : MonoBehaviour
     return null;
   }
 
+  public RiftItem GetItem(int id)
+  {
+    return AllRiftItems.GetRiftItem(id);
+  }
+
   //Getters and Setters
   public int Gold
   {
