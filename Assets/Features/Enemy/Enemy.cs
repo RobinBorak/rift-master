@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
   private EnemyStats enemyStats;
 
-  private float currentHealth;
+  [SerializeField] private float currentHealth;
   private Rigidbody2D rb;
 
   public delegate void OnDeathDelegate();
@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     rb = gameObject.GetComponent<Rigidbody2D>();
 
     currentHealth = enemyStats.maxHealth;
+    Debug.Log("Enemy currentHealth: " + currentHealth);
+    Debug.Log("Enemy maxHealth: " + enemyStats.maxHealth);
+
   }
 
   // Update is called once per frame

@@ -17,6 +17,9 @@ public class PlayerInventory : MonoBehaviour
   public delegate void OnGoldChangeDelegate(int amount);
   public static event OnGoldChangeDelegate onGoldChangeDelegate;
 
+  public delegate void OnItemChangeDelegate();
+  public static event OnItemChangeDelegate onItemChangeDelegate;
+
   void Awake()
   {
     if (instance == null)
@@ -93,6 +96,7 @@ public class PlayerInventory : MonoBehaviour
     {
       playerInventoryItems.Add(item);
     }
+    onItemChangeDelegate?.Invoke();
     Save(0);
   }
 
@@ -109,7 +113,18 @@ public class PlayerInventory : MonoBehaviour
         playerInventoryItems.Remove(playerInventoryItem);
       }
     }
+    onItemChangeDelegate?.Invoke();
     Save(0);
+  }
+
+  public RiftItem GetInventoryItem(int id)
+  {
+    PlayerInventoryItem playerInventoryItem = playerInventoryItems.Find(x => x.item.id == id);
+    if (playerInventoryItem != null)
+    {
+      return playerInventoryItem.item;
+    }
+    return null;
   }
 
   //Getters and Setters

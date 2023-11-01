@@ -132,6 +132,16 @@ public class Player : MonoBehaviour
     playerLevelUpDelegate?.Invoke();
   }
 
+  public void Heal(float amount)
+  {
+    currentHealth += amount;
+    if (currentHealth > playerStats.MaxHealth)
+    {
+      currentHealth = playerStats.MaxHealth;
+    }
+    playerHealthLossDelegate?.Invoke();
+  }
+
 
   public Character4D TestGetCharacter4D()
   {
