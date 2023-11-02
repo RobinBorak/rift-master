@@ -14,7 +14,7 @@ public class CurrentRiftLogic : MonoBehaviour
   public int rift = 0;
   private float progress = 0;
   private bool complete = false;
-  private int timeToComplete = 60;
+  private int timeToComplete = 120;
   private int timeLeft = 0;
   private int expForRiftCompletion = 50;
 
@@ -114,7 +114,7 @@ public class CurrentRiftLogic : MonoBehaviour
     PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true, timeToComplete - timeLeft));
     PlayerRiftsStats.SaveRiftsStats();
     currentRift.SetRiftDefault();
-    FindObjectOfType<Player>().GainExp(expForRiftCompletion);
+    FindObjectOfType<Player>().GainExp(expForRiftCompletion*rift);
     Invoke("GoBackToTown", 10.5f);
   }
 

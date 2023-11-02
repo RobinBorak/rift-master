@@ -24,7 +24,7 @@ public class PopulateAvailableRifts : MonoBehaviour
       Destroy(child.gameObject);
     }
 
-    for (int i = riftsStats.Count + 10; i >= 0; i--)
+    for (int i = riftsStats.Count; i >= 0; i--)
     {
       int rift = i+1;
       GameObject button = Instantiate(buttonPrefab) as GameObject;
