@@ -18,6 +18,8 @@ public class CurrentRiftLogic : MonoBehaviour
   private int timeLeft = 0;
   private int expForRiftCompletion = 50;
 
+  public bool isDoneLoading = false;
+
   public delegate void OnRiftComplete();
   public static event OnRiftComplete onRiftCompleteCallback;
 
@@ -37,6 +39,8 @@ public class CurrentRiftLogic : MonoBehaviour
     FindObjectOfType<SelectRift>().SetRift(rift);
 
     InvokeRepeating("UpdateTimeLeft", 1f, 1f);
+
+    isDoneLoading = true;
   }
 
   private void UpdateTimeLeft()

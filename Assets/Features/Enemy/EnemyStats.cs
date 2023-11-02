@@ -18,9 +18,15 @@ public class EnemyStats : MonoBehaviour
   public bool isDoneLoading = false;
 
   // Scale stats before Start() is called in other scripts
-  void Awake()
+  IEnumerator Start()
   {
     CurrentRiftLogic currentRiftLogic = FindObjectOfType<CurrentRiftLogic>();
+
+    while (!currentRiftLogic.isDoneLoading)
+    {
+      yield return null;
+    }
+
     if (currentRiftLogic)
       ScaleWithRift(currentRiftLogic.rift);
 
