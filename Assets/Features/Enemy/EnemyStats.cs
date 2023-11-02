@@ -5,7 +5,7 @@ using System;
 
 public class EnemyStats : MonoBehaviour
 {
-  public float maxHealth = 5f;
+  public float maxHealth = 2f;
   public float movementSpeed = 0.5f;
   public float maxDistanceToTargetToMove = 10f;
 
