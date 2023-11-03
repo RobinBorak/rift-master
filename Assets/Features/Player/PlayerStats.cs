@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
   private PlayerTalents playerTalents;
 
   private float maxHealth = 5f;
-  public float movementSpeed = 2.5f;
+  private float movementSpeed = 2.5f;
 
   [Header("Combat")]
   public float attackSpeed = 1f;
@@ -55,5 +55,10 @@ public class PlayerStats : MonoBehaviour
   public float MaxHealth
   {
     get { return maxHealth + (float)playerTalents.GetTalentPoints(1); }
+  }
+
+  public float MovementSpeed
+  {
+    get { return movementSpeed + (float)playerTalents.GetTalentPoints(2) * 0.03f; }
   }
 }

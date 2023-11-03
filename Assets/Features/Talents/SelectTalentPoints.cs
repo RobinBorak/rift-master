@@ -16,7 +16,7 @@ public class SelectTalentPoints : MonoBehaviour
   private PlayerTalents playerTalents;
 
   // Start is called before the first frame update
-  void Start()
+  void OnEnable()
   {
     talents = new Talents();
     playerTalents = FindObjectOfType<PlayerTalents>();

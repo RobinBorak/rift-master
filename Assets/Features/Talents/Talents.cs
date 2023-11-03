@@ -9,6 +9,7 @@ public class Talents
   public Talents()
   {
     talents.Add(new Talent { id = 1, name = "Health" });
+    talents.Add(new Talent { id = 2, name = "Speed" });
   }
 
 

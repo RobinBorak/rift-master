@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     }
     if (!isDashing)
     {
-      rb.velocity = new Vector2(moveDirection.x * playerStats.movementSpeed, moveDirection.y * playerStats.movementSpeed);
+      rb.velocity = new Vector2(moveDirection.x * playerStats.MovementSpeed, moveDirection.y * playerStats.MovementSpeed);
     }
 
     if (moveDirection == Vector2.zero)
