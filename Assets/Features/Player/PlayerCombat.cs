@@ -13,6 +13,7 @@ public class PlayerCombat : MonoBehaviour
   private PlayerHealth playerHealth;
   private Animator anim;
   private bool isAttacking = false;
+  private float dodgeChance = 10f;
 
   private void Start()
   {
@@ -54,7 +55,27 @@ public class PlayerCombat : MonoBehaviour
 
   public void TakeDamage(float damage)
   {
-    playerHealth.TakeDamage(damage);
+    if (Dodge())
+      return;
+
+    float _damage = ArmorModifier(damage);
+    playerHealth.TakeDamage(_damage);
+  }
+
+  private float ArmorModifier(float damage)
+  {
+    int armor = playerStats.Armor;
+    float _damage = damage * (1f - (float)armor / 100f);
+    return _damage;
+  }
+
+  private bool Dodge()
+  {
+    if (Random.Range(0f, 100f) < dodgeChance)
+    {
+      return true;
+    }
+    return false;
   }
 
 }

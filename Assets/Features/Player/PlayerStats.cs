@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
 
   private float maxHealth = 5f;
   private float movementSpeed = 2.5f;
+  private int armor = 0;
 
   [Header("Combat")]
   public float attackSpeed = 1f;
@@ -60,5 +61,10 @@ public class PlayerStats : MonoBehaviour
   public float MovementSpeed
   {
     get { return movementSpeed + (float)playerTalents.GetTalentPoints(2) * 0.03f; }
+  }
+
+  public int Armor
+  {
+    get { return armor; }
   }
 }
