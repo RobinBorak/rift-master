@@ -14,10 +14,6 @@ public class Player : MonoBehaviour
   private PlayerStats playerStats;
   private int currentExpStage;
 
-  public float currentHealth;
-  public delegate void PlayerHealthLossDelegate();
-  public static event PlayerHealthLossDelegate playerHealthLossDelegate;
-
   public delegate void PlayerResetDelegate();
   public static event PlayerResetDelegate playerResetDelegate;
 
@@ -46,38 +42,22 @@ public class Player : MonoBehaviour
     character = gameObject.GetComponent<Character4D>();
     Reset();
     SetAnimationSpeed();
+    SceneManager.activeSceneChanged += OnSceneChanged;
   }
 
   private void Reset()
   {
     character.AnimationManager.SetState(CharacterState.Idle);
     currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
-    currentHealth = playerStats.MaxHealth;
     playerResetDelegate?.Invoke();
-    SceneManager.activeSceneChanged += OnSceneChanged;
-
   }
 
-  public void TakeDamage(float damage)
-  {
-    currentHealth -= damage;
-    if (currentHealth <= 0)
-    {
-      Die();
-    }
-    else
-    {
-      character.AnimationManager.Hit();
-      playerHealthLossDelegate?.Invoke();
-    }
-  }
 
-  private void Die()
+  public void Die()
   {
     Debug.Log("Player died");
     character.AnimationManager.Die();
     Invoke("Respawn", 1f);
-
   }
 
   private void Respawn()
@@ -130,16 +110,6 @@ public class Player : MonoBehaviour
     playerStats.currentExp = 0;
     currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
     playerLevelUpDelegate?.Invoke();
-  }
-
-  public void Heal(float amount)
-  {
-    currentHealth += amount;
-    if (currentHealth > playerStats.MaxHealth)
-    {
-      currentHealth = playerStats.MaxHealth;
-    }
-    playerHealthLossDelegate?.Invoke();
   }
 
 

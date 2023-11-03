@@ -10,13 +10,15 @@ public class PlayerHealthBar : MonoBehaviour
   [SerializeField] private TextMeshProUGUI healthText;
   private Player player;
   private PlayerStats playerStats;
+  private PlayerHealth playerHealth;
 
 
   void Start()
   {
     player = FindObjectOfType<Player>();
     playerStats = player.GetComponent<PlayerStats>();
-    Player.playerHealthLossDelegate += UpdateHealthBar;
+    playerHealth = player.GetComponent<PlayerHealth>();
+    PlayerHealth.playerHealthLossDelegate += UpdateHealthBar;
     Player.playerResetDelegate += UpdateHealthBar;
     PlayerTalents.onTalentsChangedCallback += UpdateHealthBar;
 
@@ -25,8 +27,8 @@ public class PlayerHealthBar : MonoBehaviour
 
   private void UpdateHealthBar()
   {
-    healthBar.fillAmount = player.currentHealth / playerStats.MaxHealth;
-    healthText.text = player.currentHealth.ToString() + " / " + playerStats.MaxHealth.ToString();
+    healthBar.fillAmount = playerHealth.currentHealth / playerStats.MaxHealth;
+    healthText.text = playerHealth.currentHealth.ToString() + " / " + playerStats.MaxHealth.ToString();
   }
 
 }

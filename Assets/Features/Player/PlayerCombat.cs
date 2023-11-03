@@ -9,12 +9,16 @@ public class PlayerCombat : MonoBehaviour
 
   private Character4D character;
   private PlayerStats playerStats;
+  private Player player;
+  private PlayerHealth playerHealth;
   private Animator anim;
   private bool isAttacking = false;
 
   private void Start()
   {
     playerStats = gameObject.GetComponent<PlayerStats>();
+    player = gameObject.GetComponent<Player>();
+    playerHealth = gameObject.GetComponent<PlayerHealth>();
     character = gameObject.GetComponent<Character4D>();
   }
 
@@ -47,4 +51,10 @@ public class PlayerCombat : MonoBehaviour
   {
     isAttacking = false;
   }
+
+  public void TakeDamage(float damage)
+  {
+    playerHealth.TakeDamage(damage);
+  }
+
 }

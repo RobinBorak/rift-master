@@ -98,9 +98,9 @@ public class CurrentRiftLogic : MonoBehaviour
 
   private void GoBackToTown()
   {
-    Player player = FindObjectOfType<Player>();
+    PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
     PlayerStats playerStats = FindObjectOfType<PlayerStats>();
-    player.Heal(playerStats.MaxHealth);
+    playerHealth.HealToFull();
     playerStats.Save();
     UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     Destroy(gameObject);
