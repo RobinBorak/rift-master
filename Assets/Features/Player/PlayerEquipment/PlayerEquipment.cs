@@ -15,6 +15,7 @@ public class PlayerEquipment : MonoBehaviour
   private string key = "playerEquipment";
   private SerializedPlayerEquipment serializedPlayerEquipment;
   private PlayerInventory playerInventory;
+  private Character4D character;
 
   public delegate void OnPlayerEquipmentChangeDelegate();
   public static event OnPlayerEquipmentChangeDelegate playerEquipmentChangeDelegate;
@@ -22,12 +23,18 @@ public class PlayerEquipment : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-
+    character = gameObject.GetComponent<Player>().TestGetCharacter4D();
     playerInventory = FindObjectOfType<PlayerInventory>();
     serializedPlayerEquipment = (SerializedPlayerEquipment)Store.Load(key);
     if (serializedPlayerEquipment == null)
     {
-      serializedPlayerEquipment = new SerializedPlayerEquipment();
+      //Default equipment
+      Debug.Log("Default equipment");
+      serializedPlayerEquipment = new SerializedPlayerEquipment(
+        -1,
+         9,
+        6
+      );
     }
 
     Invoke("EquipItemsAsync", 0);
@@ -38,32 +45,88 @@ public class PlayerEquipment : MonoBehaviour
     if (serializedPlayerEquipment.helmetId != -1)
     {
       helmet = playerInventory.GetItem(serializedPlayerEquipment.helmetId);
-      Equip(helmet);
+      Equip(helmet, false);
+    }
+
+    if (serializedPlayerEquipment.armorId != -1)
+    {
+      armor = playerInventory.GetItem(serializedPlayerEquipment.armorId);
+      Equip(armor, false);
+    }
+
+    if (serializedPlayerEquipment.meleeWeapon1HId != -1)
+    {
+      meleeWeapon1H = playerInventory.GetItem(serializedPlayerEquipment.meleeWeapon1HId);
+      Equip(meleeWeapon1H, false);
     }
   }
 
-  public void Equip(RiftItem item)
+  public void Equip(RiftItem item, bool save = true)
   {
     switch (item.equipmentPart)
     {
       case EquipmentPart.Helmet:
+        UnEquip(helmet);
         EquipHelmet(item);
         break;
+      case EquipmentPart.Armor:
+        UnEquip(armor);
+        EquipArmor(item);
+        break;
+      case EquipmentPart.MeleeWeapon1H:
+        UnEquip(meleeWeapon1H);
+        EquipMeleeWeapon1H(item);
+        break;
     }
+
+    // Character4D seems to be caching equipment, so we need to update it manually
+    UpdateEquipment(); 
 
     PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
     playerInventory.RemoveItem(new PlayerInventoryItem(item));
 
     playerEquipmentChangeDelegate?.Invoke();
-    Save();
+    if (save)
+      Save();
+  }
+
+  private void UpdateEquipment()
+  {
+    character = gameObject.GetComponent<Player>().TestGetCharacter4D();
+    if (helmet == null)
+      character.UnEquip(EquipmentPart.Helmet);
+
+    if (armor == null)
+      character.UnEquip(EquipmentPart.Armor);
+
+    if (meleeWeapon1H == null)
+      character.UnEquip(EquipmentPart.MeleeWeapon1H);
+
   }
 
   public void UnEquip(RiftItem item)
   {
+    if (item == null)
+      return;
+
+    character = gameObject.GetComponent<Player>().TestGetCharacter4D();
+
     switch (item.equipmentPart)
     {
       case EquipmentPart.Helmet:
-        UnEquipHelmet(item);
+        character.UnEquip(EquipmentPart.Helmet);
+        helmet = null;
+        break;
+      case EquipmentPart.Armor:
+        character.UnEquip(EquipmentPart.Armor);
+        armor = null;
+        break;
+      case EquipmentPart.MeleeWeapon1H:
+        character.UnEquip(EquipmentPart.MeleeWeapon1H);
+        meleeWeapon1H = null;
+        break;
+      default:
+        Debug.LogError("UnEquip: equipmentPart not found");
         break;
     }
 
@@ -75,33 +138,49 @@ public class PlayerEquipment : MonoBehaviour
 
   private void EquipHelmet(RiftItem item)
   {
-    Character4D character = gameObject.GetComponent<Player>().TestGetCharacter4D();
+    character = gameObject.GetComponent<Player>().TestGetCharacter4D();
     var character4dItem = character.SpriteCollection.Armor.Find(i => i.Id == item.character4dId);
     character.Equip(character4dItem, EquipmentPart.Helmet);
     helmet = item;
   }
 
-  private void UnEquipHelmet(RiftItem item)
+  private void EquipArmor(RiftItem item)
   {
-    Character4D character = gameObject.GetComponent<Player>().TestGetCharacter4D();
-    character.UnEquip(EquipmentPart.Helmet);
-    helmet = null;
+    character = gameObject.GetComponent<Player>().TestGetCharacter4D();
+    var character4dItem = character.SpriteCollection.Armor.Find(i => i.Id == item.character4dId);
+    character.Equip(character4dItem, EquipmentPart.Armor);
+    armor = item;
+  }
+
+  private void EquipMeleeWeapon1H(RiftItem item)
+  {
+    character = gameObject.GetComponent<Player>().TestGetCharacter4D();
+    var character4dItem = character.SpriteCollection.MeleeWeapon1H.Find(i => i.Id == item.character4dId);
+    character.Equip(character4dItem, EquipmentPart.MeleeWeapon1H);
+    meleeWeapon1H = item;
   }
 
   public int GetArmor()
   {
-    int armor = 0;
+    int totalArmor = 0;
     if (helmet != null)
     {
-      armor += helmet.armor;
+      totalArmor += helmet.armor;
     }
-    return armor;
+    if (armor != null)
+    {
+      totalArmor += armor.armor;
+    }
+
+    return totalArmor;
   }
 
   private void Save()
   {
     Store.Save(key, new SerializedPlayerEquipment(
-      helmet != null ? helmet.id : -1
+      helmet != null ? helmet.id : -1,
+      armor != null ? armor.id : -1,
+      meleeWeapon1H != null ? meleeWeapon1H.id : -1
     ));
   }
 }

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7e97fff76c2a496bbfdcfb48c5a734a, type: 3}
-  m_Name: 5. Leather Armor
+  m_Name: 6. Knife
   m_EditorClassIdentifier: 
-  id: 5
-  name: Leather armor
-  icon: {fileID: 21300028, guid: 8bc37bd6496ca6848b60ff2fb07bf4da, type: 3}
+  id: 6
+  name: Knife
+  icon: {fileID: 21300000, guid: 057e91f9379997d40b259470f8d9d8a8, type: 3}
   stackable: 0
   quantity: 1
-  armor: 5
-  character4dId: FantasyHeroes.Basic.Armor.LeatherVest
+  armor: 0
+  character4dId: FantasyHeroes.Basic.MeleeWeapon1H.AdvancedShortDagger
   isEquippable: 1
-  equipmentPart: 0
+  equipmentPart: 5
