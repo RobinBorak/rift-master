@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DisplayPlayerInventoryItem : MonoBehaviour
+
+public class SellerItem : MonoBehaviour
 {
   [SerializeField] private Image icon;
   [SerializeField] private Text quantity;
-  [SerializeField] public bool showCount = true;
+  [SerializeField] public bool showCount = false;
+  [SerializeField] private bool displayItemInfo = false;
+  [SerializeField] private int cost = 0;
   public RiftItem item;
 
   // Start is called before the first frame update
-  // Must be Start() instead of OnEnable() because OnEnable() is called before the item is set
-  void Start()
+  void OnEnable()
   {
     icon.sprite = item.icon;
     if (item.stackable && showCount)
@@ -25,24 +27,28 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
       quantity.enabled = false;
     }
 
-    if (item.isEquippable)
-      InitEquippableEvent();
+    if (displayItemInfo)
+    {
+      SellerItemInfo sellerItemInfo = FindObjectOfType<SellerItemInfo>();
+      sellerItemInfo.SetItem(item, cost);
+    }
+
+    InitSelectItemEvent();
+
   }
 
-  private void InitEquippableEvent()
+  private void InitSelectItemEvent()
   {
     EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
     EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
     pointerDownEntry.eventID = EventTriggerType.PointerDown;
-    pointerDownEntry.callback.AddListener(equipItem);
+    pointerDownEntry.callback.AddListener(selectItem);
     trigger.triggers.Add(pointerDownEntry);
   }
 
-  private void equipItem(BaseEventData data)
+  private void selectItem(BaseEventData data)
   {
-    PlayerEquipment playerEquipment = FindObjectOfType<PlayerEquipment>();
-    playerEquipment.Equip(item);
+    SellerItemInfo sellerItemInfo = FindObjectOfType<SellerItemInfo>();
+    sellerItemInfo.SetItem(item, cost);
   }
-
-
 }

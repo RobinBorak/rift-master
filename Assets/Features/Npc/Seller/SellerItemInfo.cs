@@ -12,26 +12,10 @@ public class SellerItemInfo : MonoBehaviour
   [SerializeField] private TextMeshProUGUI priceText;
   [SerializeField] private Button buyButton;
 
-
-  [Header("Data")]
-  [SerializeField] private int selectedItemId;
-  [SerializeField] private int cost;
+  private int cost;
 
   private PlayerInventory playerInventory;
   private RiftItem selectedItem;
-
-
-  // Start is called before the first frame update
-  void OnEnable()
-  {
-    playerInventory = FindObjectOfType<PlayerInventory>();
-
-    selectedItem = playerInventory.GetItem(selectedItemId);
-    icon.sprite = selectedItem.icon;
-    priceText.text = cost.ToString();
-
-    ToggleButtonIsPurchasable();
-  }
 
   public void BuyItem()
   {
@@ -52,6 +36,18 @@ public class SellerItemInfo : MonoBehaviour
     {
       buyButton.interactable = true;
     }
+  }
+
+  public void SetItem(RiftItem item, int cost)
+  {
+    playerInventory = FindObjectOfType<PlayerInventory>();
+
+    this.cost = cost;
+    selectedItem = item;
+    icon.sprite = selectedItem.icon;
+    priceText.text = cost.ToString();
+
+    ToggleButtonIsPurchasable();
   }
 
 }
