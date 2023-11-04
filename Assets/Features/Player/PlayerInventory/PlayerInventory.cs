@@ -40,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (SerializedPlayerInventoryItem item in serializedInventory.items)
         {
-          AddItem(item.id, item.quantity);
+          AddItemFromSavedInventory(item.id, item.quantity);
         }
       }
 
@@ -67,30 +67,28 @@ public class PlayerInventory : MonoBehaviour
     onGoldChangeDelegate?.Invoke(amount);
   }
 
-  private void AddItem(int id, int quantity)
+  private void AddItemFromSavedInventory(int id, int quantity)
   {
     // Remove pointer to RiftItem
     RiftItem item = ScriptableObject.CreateInstance<RiftItem>();
     item.Init(AllRiftItems.GetRiftItem(id));
-    PlayerInventoryItem playerInventoryItem = playerInventoryItems.Find(x => x.item.id == id);
-
-    if (playerInventoryItem != null)
-    {
-      playerInventoryItem.item.quantity += quantity;
-    }
-    else
-    {
-      item.quantity = quantity;
-      playerInventoryItems.Add(new PlayerInventoryItem(item));
-    }
+    item.quantity = quantity;
+    playerInventoryItems.Add(new PlayerInventoryItem(item));
   }
 
   public void AddItem(PlayerInventoryItem item)
   {
-    PlayerInventoryItem playerInventoryItem = playerInventoryItems.Find(x => x.item.id == item.item.id);
-    if (playerInventoryItem != null)
+    if (item.item.stackable)
     {
-      playerInventoryItem.item.quantity += item.item.quantity;
+      PlayerInventoryItem playerInventoryItem = playerInventoryItems.Find(x => x.item.id == item.item.id);
+      if (playerInventoryItem != null)
+      {
+        playerInventoryItem.item.quantity += item.item.quantity;
+      }
+      else
+      {
+        playerInventoryItems.Add(item);
+      }
     }
     else
     {
@@ -112,6 +110,17 @@ public class PlayerInventory : MonoBehaviour
       {
         playerInventoryItems.Remove(playerInventoryItem);
       }
+    }
+    onItemChangeDelegate?.Invoke();
+    Save(0);
+  }
+
+  public void RemoveItem(PlayerInventoryItem item)
+  {
+    PlayerInventoryItem playerInventoryItem = playerInventoryItems.Find(x => x.item.id == item.item.id);
+    if (playerInventoryItem != null)
+    {
+      playerInventoryItems.Remove(playerInventoryItem);
     }
     onItemChangeDelegate?.Invoke();
     Save(0);

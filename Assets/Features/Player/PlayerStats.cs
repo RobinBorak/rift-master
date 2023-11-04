@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
   private static string key = "PlayerStats";
   private SerializedPlayerStats serializedPlayerStats;
   private PlayerTalents playerTalents;
+  private PlayerEquipment playerEquipment;
 
   private float maxHealth = 5f;
   private float movementSpeed = 2.5f;
@@ -29,6 +30,7 @@ public class PlayerStats : MonoBehaviour
       instance = this;
       DontDestroyOnLoad(gameObject);
       playerTalents = FindObjectOfType<PlayerTalents>();
+      playerEquipment = FindObjectOfType<PlayerEquipment>();
       serializedPlayerStats = (SerializedPlayerStats)Store.Load(key);
 
       if (serializedPlayerStats == null)
@@ -65,6 +67,6 @@ public class PlayerStats : MonoBehaviour
 
   public int Armor
   {
-    get { return armor; }
+    get { return armor + playerEquipment.GetArmor(); }
   }
 }

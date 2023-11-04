@@ -1,23 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 
 [CreateAssetMenu(fileName = "New RiftItem", menuName = "RiftItems/RiftItem")]
 public class RiftItem : ScriptableObject
 {
   public int id;
-  public new string name;
+  public new string name = "";
   public Sprite icon;
-  public bool stackable;
-  public int quantity;
+  public bool stackable = false;
+  public int quantity = 1;
+  public int armor = 0;
+  public string character4dId = "";
+  public bool isEquippable = false;
+  public EquipmentPart equipmentPart;
 
-  public RiftItem(int id, string name, Sprite icon, bool stackable, int quantity)
+  public RiftItem(
+    int id, 
+    string name, 
+    Sprite icon, 
+    bool stackable, 
+    int quantity,
+    int armor,
+    string character4dId,
+    bool isEquippable,
+    EquipmentPart equipmentPart
+  )
   {
     this.id = id;
     this.name = name;
     this.icon = icon;
     this.stackable = stackable;
     this.quantity = quantity;
+    this.armor = armor;
+    this.character4dId = character4dId;
+    this.isEquippable = isEquippable;
+    this.equipmentPart = equipmentPart;
   }
 
   public void Init(RiftItem item)
@@ -27,14 +46,15 @@ public class RiftItem : ScriptableObject
     this.icon = item.icon;
     this.stackable = item.stackable;
     this.quantity = item.quantity;
+    this.armor = item.armor;
+    this.character4dId = item.character4dId;
+    this.isEquippable = item.isEquippable;
+    this.equipmentPart = item.equipmentPart;
   }
 
   public RiftItem()
   {
     this.id = -1;
-    this.name = "";
-    this.icon = null;
-    this.stackable = false;
-    this.quantity = 0;
+    this.name = "what?";
   }
 }

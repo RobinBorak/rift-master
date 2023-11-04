@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7254083773435860606, guid: 7d284d0cdbb9a4285b5d53b33c1ffd4d, type: 3}
       propertyPath: level
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9005145904374114133, guid: 7d284d0cdbb9a4285b5d53b33c1ffd4d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -391,10 +391,6 @@ PrefabInstance:
     - target: {fileID: 561770494367963037, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
       propertyPath: m_Name
       value: OverlayCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7900993178626417440, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
-      propertyPath: m_Name
-      value: Health
       objectReference: {fileID: 0}
     - target: {fileID: 8425833149773018142, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
       propertyPath: m_Pivot.x
@@ -4409,6 +4405,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 224431991181618683, guid: c60e14d25ec784a31ba4c24c873056cb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431991181618683, guid: c60e14d25ec784a31ba4c24c873056cb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431991181618683, guid: c60e14d25ec784a31ba4c24c873056cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.4
       objectReference: {fileID: 0}
@@ -4454,7 +4458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1334082427500803918, guid: c60e14d25ec784a31ba4c24c873056cb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

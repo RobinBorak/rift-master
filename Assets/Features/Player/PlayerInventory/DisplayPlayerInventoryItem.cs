@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class DisplayPlayerInventoryItem : MonoBehaviour
 {
@@ -12,12 +13,33 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
   void Start()
   {
     icon.sprite = item.icon;
-    quantity.text = item.quantity.ToString();
+    if (item.stackable)
+    {
+      quantity.text = item.quantity.ToString();
+    }
+    else
+    {
+      quantity.enabled = false;
+    }
+
+    if (item.isEquippable)
+      InitEquippableEvent();
   }
 
-  // Update is called once per frame
-  void Update()
+  private void InitEquippableEvent()
   {
-
+    EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
+    EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
+    pointerDownEntry.eventID = EventTriggerType.PointerDown;
+    pointerDownEntry.callback.AddListener(equipItem);
+    trigger.triggers.Add(pointerDownEntry);
   }
+
+  private void equipItem(BaseEventData data)
+  {
+    PlayerEquipment playerEquipment = FindObjectOfType<PlayerEquipment>();
+    playerEquipment.Equip(item);
+  }
+
+
 }

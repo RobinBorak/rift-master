@@ -73,6 +73,7 @@ public class PlayerCombat : MonoBehaviour
   {
     if (Random.Range(0f, 100f) < dodgeChance)
     {
+      Debug.Log("Dodge");
       return true;
     }
     return false;
