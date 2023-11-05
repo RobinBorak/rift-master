@@ -8,6 +8,7 @@ public class RiftItem : ScriptableObject
 {
   public int id;
   public new string name = "";
+  public string description = "";
   public Sprite icon;
   public bool stackable = false;
   public int quantity = 1;
@@ -19,6 +20,7 @@ public class RiftItem : ScriptableObject
   public RiftItem(
     int id, 
     string name, 
+    string description,
     Sprite icon, 
     bool stackable, 
     int quantity,
@@ -30,6 +32,7 @@ public class RiftItem : ScriptableObject
   {
     this.id = id;
     this.name = name;
+    this.description = description;
     this.icon = icon;
     this.stackable = stackable;
     this.quantity = quantity;
@@ -43,6 +46,7 @@ public class RiftItem : ScriptableObject
   {
     this.id = item.id;
     this.name = item.name;
+    this.description = item.description;
     this.icon = item.icon;
     this.stackable = item.stackable;
     this.quantity = item.quantity;
@@ -55,6 +59,5 @@ public class RiftItem : ScriptableObject
   public RiftItem()
   {
     this.id = -1;
-    this.name = "what?";
   }
 }

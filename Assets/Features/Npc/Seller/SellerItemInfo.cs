@@ -11,6 +11,7 @@ public class SellerItemInfo : MonoBehaviour
   [SerializeField] private Image icon;
   [SerializeField] private TextMeshProUGUI priceText;
   [SerializeField] private Button buyButton;
+  [SerializeField] private RiftItemStatsCanvas riftItemStatsCanvas;
 
   private int cost;
 
@@ -46,6 +47,7 @@ public class SellerItemInfo : MonoBehaviour
     selectedItem = item;
     icon.sprite = selectedItem.icon;
     priceText.text = cost.ToString();
+    riftItemStatsCanvas.SetItem(item);
 
     ToggleButtonIsPurchasable();
   }
