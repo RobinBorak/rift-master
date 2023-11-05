@@ -44,6 +44,7 @@ public class PlayerExpBar : MonoBehaviour
   private void LevelUp()
   {
     currentLevel = playerStats.level;
+    currentExpStage = new ExpStages().GetExpStage(currentLevel + 1);
     levelText.text = currentLevel.ToString();
     expBar.fillAmount = 0;
     BlinkLevelIconWhenAvailableTalentPoints();

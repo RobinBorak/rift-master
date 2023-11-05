@@ -7,4 +7,10 @@ public class SelectedTalent
 {
   public int id;
   public int points;
+
+  public SelectedTalent(int id, int points)
+  {
+    this.id = id;
+    this.points = points;
+  }
 }

@@ -38,7 +38,6 @@ public class PlayerTalents : MonoBehaviour
 
   void Start()
   {
-
     playerStats = gameObject.GetComponent<PlayerStats>();
     totalAvailableTalentPoints = playerStats.level;
     availableTalentPoints = totalAvailableTalentPoints - TotalTalentPointsSpent();
@@ -57,7 +56,7 @@ public class PlayerTalents : MonoBehaviour
     SelectedTalent talent = selectedTalents.Find(talent => talent.id == id);
     if (talent == null)
     {
-      talent = new SelectedTalent { id = id, points = 1 };
+      talent = new SelectedTalent(id, 1);
       selectedTalents.Add(talent);
     }
     else

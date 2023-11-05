@@ -47,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
   public void HealToFull()
   {
     currentHealth = playerStats.MaxHealth;
+    playerHealthLossDelegate?.Invoke();
   }
 
 }

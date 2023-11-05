@@ -24,11 +24,15 @@ public class SelectTalentPoints : MonoBehaviour
     Talent talent = talents.GetTalent(talentId);
     talentName.text = talent.name;
     talentPoints.text = "+ " + playerTalents.GetTalentPoints(talentId).ToString();
-    addPointButton.onClick.AddListener(AddTalentPoint);
 
     toggleAddPointButton();
-    PlayerTalents.onTalentsChangedCallback += toggleAddPointButton;
 
+  }
+
+  void Start()
+  {
+    addPointButton.onClick.AddListener(AddTalentPoint);
+    PlayerTalents.onTalentsChangedCallback += toggleAddPointButton;
   }
 
   private void AddTalentPoint()
