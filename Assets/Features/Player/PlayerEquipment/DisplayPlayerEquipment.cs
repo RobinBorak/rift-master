@@ -13,6 +13,8 @@ public class DisplayPlayerEquipment : MonoBehaviour
   [SerializeField] private Image armor;
   [SerializeField] private Image meleeWeapon1H;
   [SerializeField] private Image shield;
+  [SerializeField] private RiftItemStatsCanvas riftItemStatsCanvas;
+  [SerializeField] private UnEquipButton unEquipButton;
 
   private PlayerEquipment playerEquipment;
 
@@ -23,10 +25,10 @@ public class DisplayPlayerEquipment : MonoBehaviour
     PlayerEquipment.playerEquipmentChangeDelegate += UpdateEquipment;
     UpdateEquipment();
 
-    InitEquippableEvent(helmet, EquipmentPart.Helmet);
-    InitEquippableEvent(armor, EquipmentPart.Armor);
-    InitEquippableEvent(meleeWeapon1H, EquipmentPart.MeleeWeapon1H);
-    InitEquippableEvent(shield, EquipmentPart.Shield);
+    InitSelectItemEvent(helmet, EquipmentPart.Helmet);
+    InitSelectItemEvent(armor, EquipmentPart.Armor);
+    InitSelectItemEvent(meleeWeapon1H, EquipmentPart.MeleeWeapon1H);
+    InitSelectItemEvent(shield, EquipmentPart.Shield);
   }
 
   private void UpdateEquipment()
@@ -93,33 +95,52 @@ public class DisplayPlayerEquipment : MonoBehaviour
   }
 
 
-  private void InitEquippableEvent(Image image, EquipmentPart equipmentPart)
+  private void InitSelectItemEvent(Image image, EquipmentPart equipmentPart)
   {
     EventTrigger trigger = image.GetComponent<EventTrigger>();
     EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
     pointerDownEntry.eventID = EventTriggerType.PointerDown;
-    pointerDownEntry.callback.AddListener((data) => UnEquipItem(equipmentPart));
+    pointerDownEntry.callback.AddListener((data) => { SelectItem(equipmentPart); });
     trigger.triggers.Add(pointerDownEntry);
   }
 
-  private void UnEquipItem(EquipmentPart equipmentPart)
+  private void SelectItem(EquipmentPart equipmentPart)
   {
+    RiftItem item;
+
     switch (equipmentPart)
     {
       case EquipmentPart.Helmet:
-        playerEquipment.UnEquip(playerEquipment.helmet);
+        item = playerEquipment.helmet;
         break;
       case EquipmentPart.Armor:
-        playerEquipment.UnEquip(playerEquipment.armor);
+        item = playerEquipment.armor;
         break;
       case EquipmentPart.MeleeWeapon1H:
-        playerEquipment.UnEquip(playerEquipment.meleeWeapon1H);
+        item = playerEquipment.meleeWeapon1H;
         break;
       case EquipmentPart.Shield:
-        playerEquipment.UnEquip(playerEquipment.shield);
+        item = playerEquipment.shield;
+        break;
+      default:
+        item = null;
         break;
     }
-    UpdateEquipment();
+
+    ShowStats(item);
+    ToggleUnEquipButton(item);
+  }
+  private void ShowStats(RiftItem item)
+  {
+    riftItemStatsCanvas.SetItem(item, true);
+  }
+
+  private void ToggleUnEquipButton(RiftItem item)
+  {
+    if (unEquipButton != null)
+    {
+      unEquipButton.item = item;
+    }
   }
 
 }
