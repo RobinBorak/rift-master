@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: 7. Dagger
   m_EditorClassIdentifier: 
   id: 7
-  name: Knife
-  icon: {fileID: 21300000, guid: 598c67fa788aba445ba54ce08ea8d976, type: 3}
+  name: Dagger
+  description: 
+  icon: {fileID: 21300000, guid: fa61fff55860746468c636e62079be66, type: 3}
   stackable: 0
   quantity: 1
   armor: 0

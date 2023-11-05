@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6
   name: Knife
-  icon: {fileID: 21300000, guid: 057e91f9379997d40b259470f8d9d8a8, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: d23c93ce187376249a12833543d4b146, type: 3}
   stackable: 0
   quantity: 1
   armor: 0

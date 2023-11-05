@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   name: Leather helmet
-  icon: {fileID: 21300024, guid: 8bc37bd6496ca6848b60ff2fb07bf4da, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: df6af3510c571f74496dd0d05d916530, type: 3}
   stackable: 0
   quantity: 1
   armor: 5

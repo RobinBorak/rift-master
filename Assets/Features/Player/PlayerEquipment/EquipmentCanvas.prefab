@@ -244,6 +244,8 @@ MonoBehaviour:
   armor: {fileID: 7680390743089130446}
   meleeWeapon1H: {fileID: 4374128556369197518}
   shield: {fileID: 6890331689597007274}
+  riftItemStatsCanvas: {fileID: 0}
+  unEquipButton: {fileID: 0}
 --- !u!1 &4486287048306317091
 GameObject:
   m_ObjectHideFlags: 0

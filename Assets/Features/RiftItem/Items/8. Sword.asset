@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8
   name: Sword
-  icon: {fileID: 21300000, guid: d6468802421e08643b32866babf5f577, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: 0c8845dcf77b8944da559e2ded9ac3ff, type: 3}
   stackable: 0
   quantity: 1
   armor: 0

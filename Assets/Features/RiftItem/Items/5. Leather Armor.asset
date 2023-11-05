@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   name: Leather armor
-  icon: {fileID: 21300028, guid: 8bc37bd6496ca6848b60ff2fb07bf4da, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: e4f16728e1b0b7b498e98dbfee3aea07, type: 3}
   stackable: 0
   quantity: 1
   armor: 5

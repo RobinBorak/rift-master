@@ -11,6 +11,7 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
   [SerializeField] public bool showCount = true;
   public RiftItemStatsCanvas riftItemStatsCanvas;
   public EquipButton equipButton;
+  public DropItemButton dropItemButton;
   public RiftItem item;
 
   // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
   {
     ShowStats();
     ToggleEquipButton();
+    ShowDropItemButton();
   }
   private void ShowStats()
   {
@@ -57,20 +59,15 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
     }
   }
 
-  private void InitEquippableEvent()
+  private void ShowDropItemButton()
   {
-    EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
-    EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
-    pointerDownEntry.eventID = EventTriggerType.PointerDown;
-    pointerDownEntry.callback.AddListener(equipItem);
-    trigger.triggers.Add(pointerDownEntry);
+    if (dropItemButton != null)
+    {
+      dropItemButton.gameObject.SetActive(true);
+      dropItemButton.item = item;
+    }
   }
 
-  private void equipItem(BaseEventData data)
-  {
-    PlayerEquipment playerEquipment = FindObjectOfType<PlayerEquipment>();
-    playerEquipment.Equip(item);
-  }
 
 
 }

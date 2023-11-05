@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 
 public class Loot : MonoBehaviour
 {
@@ -9,12 +10,8 @@ public class Loot : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-
     if (Item.item.name == "Gold")
       gameObject.tag = "Gold";
-
-    if (Item.item.name == "Helmet")
-      transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
   }
 
   // Update is called once per frame

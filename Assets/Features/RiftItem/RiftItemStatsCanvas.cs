@@ -13,13 +13,14 @@ public class RiftItemStatsCanvas : MonoBehaviour
   [SerializeField] private TextMeshProUGUI description;
   [SerializeField] private Button equipButton;
   [SerializeField] private Button unEquipButton;
+  [SerializeField] private Button dropItemButton;
 
 
 
   public void SetItem(RiftItem item, bool isEquipped = false)
   {
+    ClearItem();
     this.item = item;
-    emptyTexts();
 
     header.text = item.name;
 
@@ -43,6 +44,13 @@ public class RiftItemStatsCanvas : MonoBehaviour
         UnEquipButton.onUnEquipItemDelegate += ClearItem;
     }
 
+    if (dropItemButton != null)
+    {
+      dropItemButton.gameObject.SetActive(!isEquipped);
+      if (!isEquipped)
+        DropItemButton.onDropItemDelegate += ClearItem;
+    }
+
   }
 
   private void emptyTexts()
@@ -63,8 +71,12 @@ public class RiftItemStatsCanvas : MonoBehaviour
     if (unEquipButton != null)
       unEquipButton.gameObject.SetActive(false);
 
+    if (dropItemButton != null)
+      dropItemButton.gameObject.SetActive(false);
+
     UnEquipButton.onUnEquipItemDelegate -= ClearItem;
     EquipButton.onEquipItemDelegate -= ClearItem;
+    DropItemButton.onDropItemDelegate -= ClearItem;
   }
 
   public void EquipItem()

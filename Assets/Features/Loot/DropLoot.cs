@@ -30,11 +30,9 @@ public class DropLoot : MonoBehaviour
     List<PlayerInventoryItem> loot = lootTable.GetLoot();
     foreach (PlayerInventoryItem item in loot)
     {
-      // if item == Helmet, spawn on position 67, -123
-      Vector3 position = item.item.name == "Helmet" ? new Vector3(67, -123, 0) : GetRandomPosition();
+      Vector3 position = GetRandomPosition();
 
       GameObject lootObject = Instantiate(lootPrefab, position, Quaternion.identity);
-      //Find image child
       lootObject.GetComponentInChildren<SpriteRenderer>().sprite = item.item.icon;
       lootObject.GetComponent<Loot>().Item = item;
     }
