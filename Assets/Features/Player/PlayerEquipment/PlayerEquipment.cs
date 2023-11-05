@@ -37,57 +37,65 @@ public class PlayerEquipment : MonoBehaviour
       );
     }
 
-    Invoke("EquipItemsAsync", 0);
+    Invoke("LoadItems", 0);
   }
 
-  private void EquipItemsAsync()
+  private void LoadItems()
   {
     if (serializedPlayerEquipment.helmetId != -1)
     {
       helmet = playerInventory.GetItem(serializedPlayerEquipment.helmetId);
-      Equip(helmet, false);
+      Equip(helmet, true);
     }
 
     if (serializedPlayerEquipment.armorId != -1)
     {
       armor = playerInventory.GetItem(serializedPlayerEquipment.armorId);
-      Equip(armor, false);
+      Equip(armor, true);
     }
 
     if (serializedPlayerEquipment.meleeWeapon1HId != -1)
     {
       meleeWeapon1H = playerInventory.GetItem(serializedPlayerEquipment.meleeWeapon1HId);
-      Equip(meleeWeapon1H, false);
+      Equip(meleeWeapon1H, true);
     }
+    UpdateEquipment();
+    Save();
   }
 
-  public void Equip(RiftItem item, bool save = true)
+  // manualEquip is used and set to false when loading the game
+  public void Equip(RiftItem item, bool loadItems = false)
   {
     switch (item.equipmentPart)
     {
       case EquipmentPart.Helmet:
-        UnEquip(helmet);
+        if (!loadItems)
+          UnEquip(helmet);
         EquipHelmet(item);
         break;
       case EquipmentPart.Armor:
-        UnEquip(armor);
+        if (!loadItems)
+          UnEquip(armor);
         EquipArmor(item);
         break;
       case EquipmentPart.MeleeWeapon1H:
-        UnEquip(meleeWeapon1H);
+        if (!loadItems)
+          UnEquip(meleeWeapon1H);
         EquipMeleeWeapon1H(item);
         break;
     }
 
-    // Character4D seems to be caching equipment, so we need to update it manually
-    UpdateEquipment(); 
+    if (!loadItems)
+    {
+      // Character4D seems to be caching equipment, so we need to update it manually
+      UpdateEquipment();
 
-    PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
-    playerInventory.RemoveItem(new PlayerInventoryItem(item));
+      PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
+      playerInventory.RemoveItem(new PlayerInventoryItem(item));
 
-    playerEquipmentChangeDelegate?.Invoke();
-    if (save)
+      playerEquipmentChangeDelegate?.Invoke();
       Save();
+    }
   }
 
   private void UpdateEquipment()

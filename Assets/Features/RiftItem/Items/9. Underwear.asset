@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9
   name: Underwear
-  icon: {fileID: 21300028, guid: 3b856e876f3e47040a06ce587afa232a, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: a498dc7fec2072f4f80f6bc97018fef3, type: 3}
   stackable: 0
   quantity: 1
   armor: 1
