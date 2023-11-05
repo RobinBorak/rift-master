@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.5, y: -75.085144}
-  m_SizeDelta: {x: 143, y: 172.6771}
+  m_AnchoredPosition: {x: 15.2198, y: -75.085144}
+  m_SizeDelta: {x: 173.2153, y: 172.6771}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5493479168755299233
 CanvasRenderer:
@@ -327,6 +327,7 @@ MonoBehaviour:
   description: {fileID: 6812596722088770421}
   equipButton: {fileID: 0}
   unEquipButton: {fileID: 0}
+  dropItemButton: {fileID: 0}
 --- !u!1 &6121899998759639459
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,8 +362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.5, y: 104.63904}
-  m_SizeDelta: {x: 143, y: 41.2355}
+  m_AnchoredPosition: {x: 15.2198, y: 104.63904}
+  m_SizeDelta: {x: 173.2153, y: 41.2355}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4166058696978692497
 CanvasRenderer:
@@ -495,8 +496,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.5, y: 44.639038}
-  m_SizeDelta: {x: 143, y: 41.2355}
+  m_AnchoredPosition: {x: 15.2198, y: 44.639038}
+  m_SizeDelta: {x: 173.2153, y: 41.2355}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8840609204362277314
 CanvasRenderer:
@@ -629,8 +630,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.809704, y: -19}
-  m_SizeDelta: {x: 170.4345, y: 316.91}
+  m_AnchoredPosition: {x: 19.2289, y: -19}
+  m_SizeDelta: {x: 206.4466, y: 316.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4059997573478510348
 CanvasRenderer:

@@ -13,6 +13,7 @@ public class RiftItem : ScriptableObject
   public bool stackable = false;
   public int quantity = 1;
   public int armor = 0;
+  public int damage = 0;
   public string character4dId = "";
   public bool isEquippable = false;
   public EquipmentPart equipmentPart;

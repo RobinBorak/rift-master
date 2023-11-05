@@ -25,7 +25,13 @@ public class RiftItemStatsCanvas : MonoBehaviour
     header.text = item.name;
 
     if (item.armor > 0)
+    {
       row1.text = "Armor: " + item.armor.ToString();
+    }
+    else if (item.damage > 0)
+    {
+      row1.text = "Damage: " + item.damage.ToString();
+    }
 
     if (item.description != "")
       description.text = item.description;

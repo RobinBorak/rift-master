@@ -19,6 +19,7 @@ MonoBehaviour:
   stackable: 0
   quantity: 1
   armor: 0
+  damage: 4
   character4dId: FantasyHeroes.Basic.MeleeWeapon1H.Sabre
   isEquippable: 1
   equipmentPart: 5
