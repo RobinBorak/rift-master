@@ -102,7 +102,7 @@ public class CurrentRiftLogic : MonoBehaviour
     PlayerStats playerStats = FindObjectOfType<PlayerStats>();
     playerHealth.HealToFull();
     playerStats.Save();
-    UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     Destroy(gameObject);
   }
 

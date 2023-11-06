@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Welcome Screen.unity
+    guid: dfcdeda644dfd4a9083df7df962b4d3b
+  - enabled: 1
     path: Assets/Scenes/Town (Sandstone).unity
     guid: d011b44d81de14e14a606fcebce35c11
   - enabled: 1
