@@ -22,6 +22,9 @@ public class RiftItemStatsCanvas : MonoBehaviour
     ClearItem();
     this.item = item;
 
+    if (item == null)
+      return;
+
     header.text = item.name;
 
     if (item.armor > 0)

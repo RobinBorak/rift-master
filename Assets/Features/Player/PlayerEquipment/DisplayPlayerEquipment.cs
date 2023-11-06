@@ -10,9 +10,13 @@ public class DisplayPlayerEquipment : MonoBehaviour
 {
 
   [SerializeField] private Image helmet;
+  [SerializeField] private GameObject helmetContainer;
   [SerializeField] private Image armor;
+  [SerializeField] private GameObject armorContainer;
   [SerializeField] private Image meleeWeapon1H;
+  [SerializeField] private GameObject meleeWeapon1HContainer;
   [SerializeField] private Image shield;
+  [SerializeField] private GameObject shieldContainer;
   [SerializeField] private RiftItemStatsCanvas riftItemStatsCanvas;
   [SerializeField] private UnEquipButton unEquipButton;
 
@@ -25,10 +29,10 @@ public class DisplayPlayerEquipment : MonoBehaviour
     PlayerEquipment.playerEquipmentChangeDelegate += UpdateEquipment;
     UpdateEquipment();
 
-    InitSelectItemEvent(helmet, EquipmentPart.Helmet);
-    InitSelectItemEvent(armor, EquipmentPart.Armor);
-    InitSelectItemEvent(meleeWeapon1H, EquipmentPart.MeleeWeapon1H);
-    InitSelectItemEvent(shield, EquipmentPart.Shield);
+    InitSelectItemEvent(helmetContainer, EquipmentPart.Helmet);
+    InitSelectItemEvent(armorContainer, EquipmentPart.Armor);
+    InitSelectItemEvent(meleeWeapon1HContainer, EquipmentPart.MeleeWeapon1H);
+    InitSelectItemEvent(shieldContainer, EquipmentPart.Shield);
   }
 
   private void UpdateEquipment()
@@ -95,9 +99,9 @@ public class DisplayPlayerEquipment : MonoBehaviour
   }
 
 
-  private void InitSelectItemEvent(Image image, EquipmentPart equipmentPart)
+  private void InitSelectItemEvent(GameObject container, EquipmentPart equipmentPart)
   {
-    EventTrigger trigger = image.GetComponent<EventTrigger>();
+    EventTrigger trigger = container.GetComponent<EventTrigger>();
     EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
     pointerDownEntry.eventID = EventTriggerType.PointerDown;
     pointerDownEntry.callback.AddListener((data) => { SelectItem(equipmentPart); });
