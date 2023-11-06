@@ -27,8 +27,10 @@ public class PlayerHealthBar : MonoBehaviour
 
   private void UpdateHealthBar()
   {
-    int roundedHealth = Mathf.RoundToInt(playerHealth.currentHealth);
-    healthBar.fillAmount = roundedHealth / playerStats.MaxHealth;
+    int roundedHealth = Mathf.CeilToInt(playerHealth.currentHealth);
+    if (roundedHealth < 0)
+      roundedHealth = 0;
+    healthBar.fillAmount = (float)roundedHealth / playerStats.MaxHealth;
     healthText.text = roundedHealth.ToString() + " / " + playerStats.MaxHealth.ToString();
   }
 

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7e97fff76c2a496bbfdcfb48c5a734a, type: 3}
-  m_Name: 13. Ranger Armor
+  m_Name: 15. Samurai Armor
   m_EditorClassIdentifier: 
-  id: 13
-  name: Ranger Armor
+  id: 15
+  name: Samurai Helmet
   description: 
-  icon: {fileID: 21300000, guid: c4e806e382efa9a4285f7c837c59de88, type: 3}
+  icon: {fileID: 21300000, guid: b7aebf88c961d4b49997f0417934f6cd, type: 3}
   stackable: 0
   quantity: 1
-  armor: 8
+  armor: 20
   damage: 0
-  character4dId: FantasyHeroes.Basic.Armor.RangerTunic [ShowEars]
+  character4dId: FantasyHeroes.Basic.Armor.HeavySamuraiArmor
   isEquippable: 1
   equipmentPart: 0
