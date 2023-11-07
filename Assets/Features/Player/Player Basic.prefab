@@ -3481,6 +3481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMale: 1
   loadFromStore: 1
+  key: PlayerCharacter
 --- !u!1 &1456780248832120064
 GameObject:
   m_ObjectHideFlags: 0
