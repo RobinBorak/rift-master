@@ -453,14 +453,6 @@ PrefabInstance:
       value: Seller Character
       objectReference: {fileID: 0}
     - target: {fileID: 4917535008886344599, guid: d590f4292c30f4478a1141cf663b5ff6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917535008886344599, guid: d590f4292c30f4478a1141cf663b5ff6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917535008886344599, guid: d590f4292c30f4478a1141cf663b5ff6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
