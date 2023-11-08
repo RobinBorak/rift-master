@@ -82,15 +82,20 @@ public class CurrentRiftLogic : MonoBehaviour
 
   public void DecreaseSmallProgress()
   {
+    if (progress <= 0)
+      return;
     IncreaseProgress(-10f);
   }
 
   private void IncreaseProgress(float amount)
   {
+    if (complete)
+      return;
+
     progress += amount;
     statusImage.fillAmount = progress / 100f;
 
-    if (progress >= 100 && !complete)
+    if (progress >= 100)
     {
       Success();
     }
@@ -114,7 +119,7 @@ public class CurrentRiftLogic : MonoBehaviour
     PlayerRiftsStats.CreateOrUpdate(new RiftStats(rift, true, timeToComplete - timeLeft));
     PlayerRiftsStats.SaveRiftsStats();
     currentRift.SetRiftDefault();
-    FindObjectOfType<Player>().GainExp(expForRiftCompletion*rift);
+    FindObjectOfType<Player>().GainExp(expForRiftCompletion * rift);
     Invoke("GoBackToTown", 10.5f);
   }
 

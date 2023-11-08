@@ -9,6 +9,7 @@ TagManager:
   - Gold
   - Loot
   - Chest
+  - Start
   layers:
   - Default
   - TransparentFX

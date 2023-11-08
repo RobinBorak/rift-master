@@ -62,27 +62,37 @@ public class Player : MonoBehaviour
 
   private void Respawn()
   {
-    PlaceAtStartPosition();
+    PlaceAtRespawn();
     Reset();
     FindObjectOfType<CurrentRiftLogic>().DecreaseSmallProgress();
   }
 
+  private void PlaceAtRespawn()
+  {
+    // Find closest RespawnPosition game object to player
+    GameObject[] respawnPositions = GameObject.FindGameObjectsWithTag("Respawn");
+    Transform player = gameObject.transform;
+    Transform startPosition = respawnPositions[0].transform;
+    foreach (GameObject respawnPosition in respawnPositions)
+    {
+      if (Vector3.Distance(player.position, respawnPosition.transform.position) < Vector3.Distance(player.position, startPosition.position))
+      {
+        startPosition = respawnPosition.transform;
+      }
+    }
+
+    transform.position = startPosition.position;
+  }
+
   private void PlaceAtStartPosition()
   {
-    Transform startPosition = GameObject.Find("RespawnPosition").transform;
+    Transform startPosition = GameObject.FindGameObjectWithTag("Start").transform;
     transform.position = startPosition.position;
   }
 
   private void OnSceneChanged(Scene current, Scene next)
   {
-    if (next.buildIndex == 0)
-    {
-      PlaceAtStartPosition();
-    }
-    else //if (next.name == "Rift")
-    {
-      PlaceAtStartPosition();
-    }
+    PlaceAtStartPosition();
   }
 
 
