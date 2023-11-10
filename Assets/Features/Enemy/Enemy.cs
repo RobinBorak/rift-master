@@ -12,13 +12,17 @@ public class Enemy : MonoBehaviour
   public delegate void OnDeathDelegate();
   public OnDeathDelegate onDeathDelegate;
 
+  public delegate void OnAnyEnemyDeathDelegate();
+  public static OnAnyEnemyDeathDelegate onAnyEnemyDeathDelegate;
+
   // Start is called before the first frame update
   IEnumerator Start()
   {
     enemyStats = gameObject.GetComponent<EnemyStats>();
     rb = gameObject.GetComponent<Rigidbody2D>();
 
-    while (!enemyStats.isDoneLoading){
+    while (!enemyStats.isDoneLoading)
+    {
       yield return null;
     }
 
@@ -49,6 +53,7 @@ public class Enemy : MonoBehaviour
     FindObjectOfType<Player>().GetComponent<Player>()?.GainExp(enemyStats.exp);
     FindObjectOfType<CurrentRiftLogic>()?.IncreaseSmallProgress();
     onDeathDelegate?.Invoke();
+    onAnyEnemyDeathDelegate?.Invoke();
     Destroy(gameObject);
   }
 }

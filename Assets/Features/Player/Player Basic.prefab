@@ -2983,6 +2983,7 @@ GameObject:
   - component: {fileID: 5205545939342507688}
   - component: {fileID: 7724746489364326461}
   - component: {fileID: 6264522494117371931}
+  - component: {fileID: 386378048188514934}
   m_Layer: 8
   m_Name: Player Basic
   m_TagString: Player
@@ -3482,6 +3483,21 @@ MonoBehaviour:
   isMale: 1
   loadFromStore: 1
   key: PlayerCharacter
+--- !u!114 &386378048188514934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456283338471215551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63e4baec8adf4feda781d6292ea79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chestPrefab: {fileID: 1334082427500803918, guid: c60e14d25ec784a31ba4c24c873056cb, type: 3}
+  enemyKilled: 0
+  killsToComplete: 50
 --- !u!1 &1456780248832120064
 GameObject:
   m_ObjectHideFlags: 0
