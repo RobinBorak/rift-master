@@ -20,6 +20,7 @@ public class RiftItem : ScriptableObject
   public string character4dId = "";
   public bool isEquippable = false;
   public EquipmentPart equipmentPart;
+  public bool isUsable = false;
 
   public RiftItem(
     int id,
@@ -31,7 +32,8 @@ public class RiftItem : ScriptableObject
     int armor,
     string character4dId,
     bool isEquippable,
-    EquipmentPart equipmentPart
+    EquipmentPart equipmentPart,
+    bool isUsable
   )
   {
     this.id = id;
@@ -44,6 +46,7 @@ public class RiftItem : ScriptableObject
     this.character4dId = character4dId;
     this.isEquippable = isEquippable;
     this.equipmentPart = equipmentPart;
+    this.isUsable = isUsable;
   }
 
   public void Init(RiftItem item)
@@ -58,6 +61,7 @@ public class RiftItem : ScriptableObject
     this.character4dId = item.character4dId;
     this.isEquippable = item.isEquippable;
     this.equipmentPart = item.equipmentPart;
+    this.isUsable = item.isUsable;
   }
 
   public RiftItem()
@@ -73,6 +77,9 @@ public class RiftItem : ScriptableObject
       case 1:
         itemUsed = UseMinorHealthPotion();
         break;
+      case 16:
+        itemUsed = UseTalentScroll();
+        break;
       default:
         throw new System.NotImplementedException();
     }
@@ -87,6 +94,18 @@ public class RiftItem : ScriptableObject
 
     if (playerHealth.currentHealth >= playerStats.MaxHealth) return false;
     playerHealth.Heal(10);
+    return true;
+  }
+
+  //Reset all talent points
+  private bool UseTalentScroll()
+  {
+    Player player = FindObjectOfType<Player>();
+    PlayerTalents playerTalents = FindObjectOfType<PlayerTalents>();
+    if (playerTalents.availableTalentPoints == playerTalents.totalAvailableTalentPoints) return false;
+
+    playerTalents.ResetTalentPoints();
+    player.Reset();
     return true;
   }
 }

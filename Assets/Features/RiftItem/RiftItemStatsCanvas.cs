@@ -14,6 +14,7 @@ public class RiftItemStatsCanvas : MonoBehaviour
   [SerializeField] private Button equipButton;
   [SerializeField] private Button unEquipButton;
   [SerializeField] private Button dropItemButton;
+  [SerializeField] private Button useButton;
 
 
 
@@ -42,6 +43,7 @@ public class RiftItemStatsCanvas : MonoBehaviour
     if (equipButton != null)
     {
       equipButton.gameObject.SetActive(item.isEquippable);
+      equipButton.GetComponent<EquipButton>().item = item;
       if (item.isEquippable)
         EquipButton.onEquipItemDelegate += ClearItem;
     }
@@ -49,6 +51,7 @@ public class RiftItemStatsCanvas : MonoBehaviour
     if (unEquipButton != null)
     {
       unEquipButton.gameObject.SetActive(isEquipped);
+      unEquipButton.GetComponent<UnEquipButton>().item = item;
       if (isEquipped)
         UnEquipButton.onUnEquipItemDelegate += ClearItem;
     }
@@ -56,8 +59,17 @@ public class RiftItemStatsCanvas : MonoBehaviour
     if (dropItemButton != null)
     {
       dropItemButton.gameObject.SetActive(!isEquipped);
+      dropItemButton.GetComponent<DropItemButton>().item = item;
       if (!isEquipped)
         DropItemButton.onDropItemDelegate += ClearItem;
+    }
+
+    if (useButton != null)
+    {
+      useButton.gameObject.SetActive(item.isUsable);
+      useButton.GetComponent<UseButton>().item = item;
+      if (item.isUsable)
+        UseButton.onUseItemDelegate += ClearItem;
     }
 
   }
@@ -83,9 +95,13 @@ public class RiftItemStatsCanvas : MonoBehaviour
     if (dropItemButton != null)
       dropItemButton.gameObject.SetActive(false);
 
+    if (useButton != null)
+      useButton.gameObject.SetActive(false);
+
     UnEquipButton.onUnEquipItemDelegate -= ClearItem;
     EquipButton.onEquipItemDelegate -= ClearItem;
     DropItemButton.onDropItemDelegate -= ClearItem;
+    UseButton.onUseItemDelegate -= ClearItem;
   }
 
   public void EquipItem()

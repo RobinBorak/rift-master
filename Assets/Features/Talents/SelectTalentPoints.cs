@@ -23,28 +23,32 @@ public class SelectTalentPoints : MonoBehaviour
 
     Talent talent = talents.GetTalent(talentId);
     talentName.text = talent.name;
-    talentPoints.text = "+ " + playerTalents.GetTalentPoints(talentId).ToString();
 
-    toggleAddPointButton();
+    OnTalentsChanged();
 
   }
 
   void Start()
   {
     addPointButton.onClick.AddListener(AddTalentPoint);
-    PlayerTalents.onTalentsChangedCallback += toggleAddPointButton;
+    PlayerTalents.onTalentsChangedCallback += OnTalentsChanged;
   }
 
   private void AddTalentPoint()
   {
     Debug.Log("Add point to talent " + talentId);
     playerTalents.AddTalent(talentId);
+    UpdateText();
+  }
+
+  private void UpdateText()
+  {
     talentPoints.text = "+ " + playerTalents.GetTalentPoints(talentId).ToString();
   }
 
-
-  private void toggleAddPointButton()
+  private void OnTalentsChanged()
   {
     addPointButton.gameObject.SetActive(playerTalents.availableTalentPoints > 0);
+    UpdateText();
   }
 }

@@ -82,6 +82,13 @@ public class PlayerTalents : MonoBehaviour
     onTalentsChangedCallback.Invoke();
   }
 
+  public void ResetTalentPoints()
+  {
+    selectedTalents = new List<SelectedTalent>();
+    availableTalentPoints = totalAvailableTalentPoints;
+    onTalentsChangedCallback.Invoke();
+  }
+
   public int GetTalentPoints(int id)
   {
     SelectedTalent talent = selectedTalents.Find(talent => talent.id == id);

@@ -10,8 +10,6 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
   [SerializeField] private Text quantity;
   [SerializeField] public bool showCount = true;
   public RiftItemStatsCanvas riftItemStatsCanvas;
-  public EquipButton equipButton;
-  public DropItemButton dropItemButton;
   public RiftItem item;
 
   // Start is called before the first frame update
@@ -43,31 +41,10 @@ public class DisplayPlayerInventoryItem : MonoBehaviour
   private void SelectItem()
   {
     ShowStats();
-    ToggleEquipButton();
-    ShowDropItemButton();
   }
   private void ShowStats()
   {
     riftItemStatsCanvas.SetItem(item);
   }
-  private void ToggleEquipButton()
-  {
-    if (equipButton != null)
-    {
-      equipButton.gameObject.SetActive(item.isEquippable);
-      equipButton.item = item;
-    }
-  }
-
-  private void ShowDropItemButton()
-  {
-    if (dropItemButton != null)
-    {
-      dropItemButton.gameObject.SetActive(true);
-      dropItemButton.item = item;
-    }
-  }
-
-
 
 }

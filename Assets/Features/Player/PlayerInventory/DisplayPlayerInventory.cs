@@ -10,8 +10,6 @@ public class DisplayPlayerInventory : MonoBehaviour
   [SerializeField] private GameObject inventoryItemPrefab;
   [SerializeField] private RiftItemStatsCanvas riftItemStatsCanvas;
   [SerializeField] private ToggleGroup toggleGroup;
-  [SerializeField] private EquipButton equipButton;
-  [SerializeField] private DropItemButton dropItemButton;
   private PlayerInventory playerInventory;
 
   void OnEnable()
@@ -35,8 +33,6 @@ public class DisplayPlayerInventory : MonoBehaviour
       GameObject itemObject = Instantiate(inventoryItemPrefab, transform);
       itemObject.GetComponent<DisplayPlayerInventoryItem>().item = playerInventoryItem.item;
       itemObject.GetComponent<DisplayPlayerInventoryItem>().riftItemStatsCanvas = riftItemStatsCanvas;
-      itemObject.GetComponent<DisplayPlayerInventoryItem>().equipButton = equipButton;
-      itemObject.GetComponent<DisplayPlayerInventoryItem>().dropItemButton = dropItemButton;
       itemObject.GetComponent<Toggle>().group = toggleGroup;
       itemObject.GetComponent<Toggle>().isOn = false;
       itemObject.transform.SetParent(grid.transform);

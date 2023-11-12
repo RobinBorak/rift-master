@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     SceneManager.activeSceneChanged += OnSceneChanged;
   }
 
-  private void Reset()
+  public void Reset()
   {
     character.AnimationManager.SetState(CharacterState.Idle);
     currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
