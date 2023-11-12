@@ -45,6 +45,7 @@ public class PlayerInventory : MonoBehaviour
       }
 
       PlayerInventory.onGoldChangeDelegate += Save;
+      RiftItem.useItemDelegate += (int id) => RemoveItem(id, 1);
     }
     else
     {

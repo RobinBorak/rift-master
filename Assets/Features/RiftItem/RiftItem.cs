@@ -6,6 +6,9 @@ using Assets.HeroEditor4D.Common.Scripts.Enums;
 [CreateAssetMenu(fileName = "New RiftItem", menuName = "RiftItems/RiftItem")]
 public class RiftItem : ScriptableObject
 {
+  public delegate void UseItemDelegate(int id);
+  public static event UseItemDelegate useItemDelegate;
+
   public int id;
   public new string name = "";
   public string description = "";
@@ -19,11 +22,11 @@ public class RiftItem : ScriptableObject
   public EquipmentPart equipmentPart;
 
   public RiftItem(
-    int id, 
-    string name, 
+    int id,
+    string name,
     string description,
-    Sprite icon, 
-    bool stackable, 
+    Sprite icon,
+    bool stackable,
     int quantity,
     int armor,
     string character4dId,
@@ -60,5 +63,30 @@ public class RiftItem : ScriptableObject
   public RiftItem()
   {
     this.id = -1;
+  }
+
+  public void Use()
+  {
+    bool itemUsed = false;
+    switch (id)
+    {
+      case 1:
+        itemUsed = UseMinorHealthPotion();
+        break;
+      default:
+        throw new System.NotImplementedException();
+    }
+    if (itemUsed)
+      useItemDelegate?.Invoke(id);
+  }
+
+  private bool UseMinorHealthPotion()
+  {
+    PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+    PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+
+    if (playerHealth.currentHealth >= playerStats.MaxHealth) return false;
+    playerHealth.Heal(10);
+    return true;
   }
 }

@@ -14,6 +14,7 @@ public class ActionItemButton : MonoBehaviour
   private PlayerInventory playerInventory;
   private PlayerHealth playerHealth;
   private PlayerStats playerStats;
+  private RiftItem item;
   // Start is called before the first frame update
   void Start()
   {
@@ -21,7 +22,7 @@ public class ActionItemButton : MonoBehaviour
     playerInventory = FindObjectOfType<PlayerInventory>();
     playerStats = FindObjectOfType<PlayerStats>();
     inventoryItem = playerInventory.GetInventoryItem(itemId);
-    RiftItem item = playerInventory.GetItem(itemId);
+    item = playerInventory.GetItem(itemId);
 
     icon.GetComponent<Image>().sprite = item.icon;
     UpdateItemText();
@@ -42,11 +43,8 @@ public class ActionItemButton : MonoBehaviour
   private void UseItem(BaseEventData data)
   {
     if (inventoryItem == null || inventoryItem.quantity <= 0) return;
-    if (playerHealth.currentHealth >= playerStats.MaxHealth) return;
-    playerHealth.Heal(10);
-    playerInventory.RemoveItem(inventoryItem.id, 1);
+    item.Use();
   }
-
   private void UpdateItemText()
   {
     inventoryItem = playerInventory.GetInventoryItem(itemId);

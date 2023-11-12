@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootItemIds: 0300000001000000
   lootItemChances: 140000000a000000
-  lootItemMaxQuantity: 0a00000001000000
+  lootItemMaxQuantities: 1400000001000000
