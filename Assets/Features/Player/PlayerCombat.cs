@@ -53,22 +53,20 @@ public class PlayerCombat : MonoBehaviour
     isAttacking = false;
   }
 
-  public void TakeDamage(float damage)
+  public void TakeDamage(int damage)
   {
     if (Dodge())
       return;
 
-    float _damage = ArmorModifier(damage);
+    int _damage = ArmorModifier(damage);
     playerHealth.TakeDamage(_damage);
   }
 
-  private float ArmorModifier(float damage)
+  private int ArmorModifier(int damage)
   {
     int armor = playerStats.Armor;
-    float _damage = damage * (1f - (float)armor / 100f);
-    //round damage to nearest int
-    _damage = Mathf.Round(_damage);
-    return (float)_damage;
+    int _damage = damage * (1 - armor / 100);
+    return _damage;
   }
 
   private bool Dodge()

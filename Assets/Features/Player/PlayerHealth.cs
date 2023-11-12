@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-  public float currentHealth;
+  public int currentHealth;
   private PlayerStats playerStats;
   private Player player;
 
@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     HealToFull();
   }
 
-  public void TakeDamage(float damage)
+  public void TakeDamage(int damage)
   {
     currentHealth -= damage;
     if (currentHealth <= 0)
@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
     playerHealthLossDelegate?.Invoke();
   }
 
-  public void Heal(float amount)
+  public void Heal(int amount)
   {
     currentHealth += amount;
     if (currentHealth > playerStats.MaxHealth)

@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
   private PlayerTalents playerTalents;
   private PlayerEquipment playerEquipment;
 
-  private float maxHealth = 20f;
+  private int maxHealth = 20;
   private float movementSpeed = 2.5f;
   private int armor = 0;
 
@@ -55,9 +55,9 @@ public class PlayerStats : MonoBehaviour
   }
 
   //Getters and Setters
-  public float MaxHealth
+  public int MaxHealth
   {
-    get { return maxHealth + (float)(playerTalents.GetTalentPoints(1) * 5); }
+    get { return maxHealth + (playerTalents.GetTalentPoints(1) * 5); }
   }
 
   public float MovementSpeed

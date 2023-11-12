@@ -43,7 +43,7 @@ public class ActionItemButton : MonoBehaviour
   {
     if (inventoryItem == null || inventoryItem.quantity <= 0) return;
     if (playerHealth.currentHealth >= playerStats.MaxHealth) return;
-    playerHealth.Heal(10f);
+    playerHealth.Heal(10);
     playerInventory.RemoveItem(inventoryItem.id, 1);
   }
 
