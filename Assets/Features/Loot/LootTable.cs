@@ -15,7 +15,7 @@ public class LootTable : ScriptableObject
   {
     RiftItems allRiftItems = FindObjectOfType<PlayerInventory>().AllRiftItems;
     List<PlayerInventoryItem> loot = new List<PlayerInventoryItem>();
-    int rift = FindObjectOfType<CurrentRiftLogic>().Rift;
+    int rift = FindObjectOfType<CurrentRiftLogic>()?.Rift ?? 1;
 
     List<int>[] lootWithRiftLevel = ScaleLootWithRift(rift);
     List<int> scaledLootItemIds = lootWithRiftLevel[0];

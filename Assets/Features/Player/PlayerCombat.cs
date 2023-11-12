@@ -66,7 +66,9 @@ public class PlayerCombat : MonoBehaviour
   {
     int armor = playerStats.Armor;
     float _damage = damage * (1f - (float)armor / 100f);
-    return _damage;
+    //round damage to nearest int
+    _damage = Mathf.Round(_damage);
+    return (float)_damage;
   }
 
   private bool Dodge()
