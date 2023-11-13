@@ -22,17 +22,32 @@ public class DisplayPlayerEquipment : MonoBehaviour
 
   private PlayerEquipment playerEquipment;
 
+
+  private EventTrigger helmetTrigger;
+  private EventTrigger armorTrigger;
+  private EventTrigger meleeWeapon1HTrigger;
+  private EventTrigger shieldTrigger;
+
   // Start is called before the first frame update
-  void Start()
+  void OnEnable()
   {
     playerEquipment = FindObjectOfType<PlayerEquipment>();
     PlayerEquipment.playerEquipmentChangeDelegate += UpdateEquipment;
     UpdateEquipment();
 
-    InitSelectItemEvent(helmetContainer, EquipmentPart.Helmet);
-    InitSelectItemEvent(armorContainer, EquipmentPart.Armor);
-    InitSelectItemEvent(meleeWeapon1HContainer, EquipmentPart.MeleeWeapon1H);
-    InitSelectItemEvent(shieldContainer, EquipmentPart.Shield);
+    helmetTrigger = InitSelectItemEvent(helmetContainer, EquipmentPart.Helmet);
+    armorTrigger = InitSelectItemEvent(armorContainer, EquipmentPart.Armor);
+    meleeWeapon1HTrigger = InitSelectItemEvent(meleeWeapon1HContainer, EquipmentPart.MeleeWeapon1H);
+    shieldTrigger = InitSelectItemEvent(shieldContainer, EquipmentPart.Shield);
+  }
+
+  void OnDisable()
+  {
+    PlayerEquipment.playerEquipmentChangeDelegate -= UpdateEquipment;
+    helmetTrigger.triggers.Clear();
+    armorTrigger.triggers.Clear();
+    meleeWeapon1HTrigger.triggers.Clear();
+    shieldTrigger.triggers.Clear();
   }
 
   private void UpdateEquipment()
@@ -99,13 +114,14 @@ public class DisplayPlayerEquipment : MonoBehaviour
   }
 
 
-  private void InitSelectItemEvent(GameObject container, EquipmentPart equipmentPart)
+  private EventTrigger InitSelectItemEvent(GameObject container, EquipmentPart equipmentPart)
   {
     EventTrigger trigger = container.GetComponent<EventTrigger>();
     EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
     pointerDownEntry.eventID = EventTriggerType.PointerDown;
     pointerDownEntry.callback.AddListener((data) => { SelectItem(equipmentPart); });
     trigger.triggers.Add(pointerDownEntry);
+    return trigger;
   }
 
   private void SelectItem(EquipmentPart equipmentPart)
