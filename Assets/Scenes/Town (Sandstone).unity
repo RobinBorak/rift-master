@@ -669,11 +669,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
---- !u!1 &1160219536 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 165499625100256415, guid: 594671f25c3b844529545cb5902fcd07, type: 3}
-  m_PrefabInstance: {fileID: 1018978012}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1366396016 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 653270088653028142, guid: 536dd56ad95024c16b6e02df61c16dee, type: 3}
@@ -5374,18 +5369,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 371535707682190421, guid: 893054f26073a4ea7ae9dc3f8dca102c, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 371535707682190421, guid: 893054f26073a4ea7ae9dc3f8dca102c, type: 3}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2486880556951778552, guid: 893054f26073a4ea7ae9dc3f8dca102c, type: 3}
-      propertyPath: talentCanvas
-      value: 
-      objectReference: {fileID: 1160219536}
     - target: {fileID: 6707277976614676348, guid: 893054f26073a4ea7ae9dc3f8dca102c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.96
