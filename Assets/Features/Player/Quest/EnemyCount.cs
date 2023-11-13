@@ -9,37 +9,22 @@ public class EnemyCount : MonoBehaviour
   public int killsToComplete = 50;
   private int completed = 0;
   private int expForCompletion = 50;
-  private static EnemyCount instance;
   private static string key = "EnemyCount";
 
   public delegate void OnEnemyDeathCountChange();
   public static OnEnemyDeathCountChange onEnemyDeathCountChange;
 
 
-  void Awake()
-  {
-    if (instance == null)
-    {
-      instance = this;
-      DontDestroyOnLoad(gameObject);
-
-      SerializedEnemyCount serializedEnemyCount = (SerializedEnemyCount)Store.Load(key);
-      if (serializedEnemyCount == null)
-        serializedEnemyCount = new SerializedEnemyCount();
-
-      enemyKilled = serializedEnemyCount.enemyKilled;
-      completed = serializedEnemyCount.completed;
-      ScaleDifficulty();
-    }
-    else
-    {
-      Destroy(gameObject);
-    }
-  }
-
   // Start is called before the first frame update
   void Start()
   {
+    SerializedEnemyCount serializedEnemyCount = (SerializedEnemyCount)Store.Load(key);
+    if (serializedEnemyCount == null)
+      serializedEnemyCount = new SerializedEnemyCount();
+
+    enemyKilled = serializedEnemyCount.enemyKilled;
+    completed = serializedEnemyCount.completed;
+    ScaleDifficulty();
     Enemy.onAnyEnemyDeathDelegate += IncreaseEnemyKilled;
   }
 
