@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
   private PlayerStats playerStats;
   private int currentExpStage;
 
+  [SerializeField] private GameObject levelUpEffectPrefab;
+
   public delegate void PlayerResetDelegate();
   public static event PlayerResetDelegate playerResetDelegate;
 
@@ -119,7 +121,15 @@ public class Player : MonoBehaviour
     playerStats.level++;
     playerStats.currentExp = 0;
     currentExpStage = new ExpStages().GetExpStage(playerStats.level + 1);
+    LevelUpEffect();
     playerLevelUpDelegate?.Invoke();
+  }
+
+  private void LevelUpEffect()
+  {
+    GameObject levelUpEffect = Instantiate(levelUpEffectPrefab, transform.position, Quaternion.identity);
+    levelUpEffect.transform.parent = gameObject.transform;
+    Destroy(levelUpEffect, 2f);
   }
 
 

@@ -135,13 +135,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 4459781241908422680, guid: 7d284d0cdbb9a4285b5d53b33c1ffd4d, type: 3}
+      propertyPath: levelUpEffectPrefab
+      value: 
+      objectReference: {fileID: 3874635022589376825, guid: ffdfb7851a968494f8fe76ee88f3791a, type: 3}
     - target: {fileID: 9005145904374114133, guid: 7d284d0cdbb9a4285b5d53b33c1ffd4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.17
+      value: 20.26
       objectReference: {fileID: 0}
     - target: {fileID: 9005145904374114133, guid: 7d284d0cdbb9a4285b5d53b33c1ffd4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.75
+      value: -3.09
       objectReference: {fileID: 0}
     - target: {fileID: 9005145904374114133, guid: 7d284d0cdbb9a4285b5d53b33c1ffd4d, type: 3}
       propertyPath: m_LocalPosition.z
