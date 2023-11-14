@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
   private bool isDashing = false;
   private bool isDashingCooldown = false;
+  public float dashingCooldown = 1.5f;
 
   private Animator animator;
   private Rigidbody2D rb;
@@ -100,15 +101,16 @@ public class PlayerMovement : MonoBehaviour
     Character.SetDirection(direction);
   }
 
-  public void Dash()
+  public bool Dash()
   {
     if (isDashingCooldown)
-      return;
+      return false;
     isDashing = true;
     isDashingCooldown = true;
     rb.velocity = new Vector2(lastMoveDirection.x * 10, lastMoveDirection.y * 10);
     Invoke("StopDashing", 0.2f);
-    Invoke("ResetDashingCooldown", 1.5f);
+    Invoke("ResetDashingCooldown", dashingCooldown);
+    return true;
   }
 
   private void StopDashing()

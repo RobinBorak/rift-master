@@ -3336,6 +3336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f01b371d0784306af86d13c166fa48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashingCooldown: 1.5
   Character: {fileID: 2758533036856660529}
 --- !u!114 &7254083773435860606
 MonoBehaviour:
