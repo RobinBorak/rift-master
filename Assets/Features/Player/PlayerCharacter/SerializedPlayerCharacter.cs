@@ -6,9 +6,11 @@ using UnityEngine;
 public class SerializedPlayerCharacter
 {
   public bool isMale = true;
+  public string username = "";
 
-  public SerializedPlayerCharacter(bool isMale)
+  public SerializedPlayerCharacter(bool isMale, string username)
   {
     this.isMale = isMale;
+    this.username = username;
   }
 }

@@ -10,6 +10,7 @@ public class CurrentRiftLogic : MonoBehaviour
   [SerializeField] private Image statusImage;
   [SerializeField] private Image timerImage;
   private CurrentRift currentRift;
+  private PlayerCharacter playerCharacter;
 
   public int rift = 0;
   private float progress = 0;
@@ -29,6 +30,7 @@ public class CurrentRiftLogic : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    playerCharacter = FindObjectOfType<PlayerCharacter>();
     timeLeft = timeToComplete;
 
     statusImage.fillAmount = progress;
@@ -121,6 +123,7 @@ public class CurrentRiftLogic : MonoBehaviour
     currentRift.SetRiftDefault();
     FindObjectOfType<Player>().GainExp(expForRiftCompletion * rift);
     Invoke("GoBackToTown", 10.5f);
+    Highscore.UploadNewEntry(playerCharacter.Username, rift);
   }
 
   //Getters and setters

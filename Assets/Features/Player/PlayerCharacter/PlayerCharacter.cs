@@ -10,6 +10,7 @@ public class PlayerCharacter : MonoBehaviour
   private Character4D character;
   public bool isMale = true;
   public bool loadFromStore = true;
+  private string username = "";
 
   public string key = "PlayerCharacter";
 
@@ -57,7 +58,10 @@ public class PlayerCharacter : MonoBehaviour
 
   public void Save()
   {
-    SerializedPlayerCharacter serializedPlayerCharacter = new SerializedPlayerCharacter(isMale);
+    SerializedPlayerCharacter serializedPlayerCharacter = new SerializedPlayerCharacter(
+      isMale,
+      username
+    );
     Store.Save(key, serializedPlayerCharacter);
   }
 
@@ -67,6 +71,7 @@ public class PlayerCharacter : MonoBehaviour
     if (serializedPlayerCharacter != null)
     {
       isMale = serializedPlayerCharacter.isMale;
+      username = serializedPlayerCharacter.username;
     }
   }
 
@@ -77,4 +82,53 @@ public class PlayerCharacter : MonoBehaviour
     character.UnEquip(EquipmentPart.MeleeWeapon1H);
   }
 
+  public void SetUsername(string username)
+  {
+    //Sanitize username
+    username = username.Replace(" ", "")
+                        .Replace(";", "")
+                        .Replace(":", "")
+                        .Replace("!", "")
+                        .Replace("?", "")
+                        .Replace(".", "")
+                        .Replace(",", "")
+                        .Replace("-", "")
+                        .Replace("_", "")
+                        .Replace("(", "")
+                        .Replace(")", "")
+                        .Replace("[", "")
+                        .Replace("]", "")
+                        .Replace("{", "")
+                        .Replace("}", "")
+                        .Replace("/", "")
+                        .Replace("\\", "")
+                        .Replace("'", "")
+                        .Replace("\"", "")
+                        .Replace("=", "")
+                        .Replace("+", "")
+                        .Replace("*", "")
+                        .Replace("&", "")
+                        .Replace("%", "")
+                        .Replace("$", "")
+                        .Replace("#", "")
+                        .Replace("@", "")
+                        .Replace("<", "")
+                        .Replace(">", "")
+                        .Replace("|", "")
+                        .Replace("`", "")
+                        .Replace("~", "")
+                        .Replace("^", "")
+                        .Replace("¨", "")
+                        .Replace("´", "");
+
+    this.username = username;
+  }
+
+  public string Username
+  {
+    get
+    {
+      return username;
+    }
+  }
 }

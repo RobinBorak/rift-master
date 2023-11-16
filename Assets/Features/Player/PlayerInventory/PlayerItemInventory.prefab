@@ -105,6 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 688659321421860403}
   quantity: {fileID: 1931719790304590614}
+  showCount: 1
+  riftItemStatsCanvas: {fileID: 0}
   item: {fileID: 0}
 --- !u!114 &2686436582408077627
 MonoBehaviour:
