@@ -7,7 +7,7 @@ using Dan.Models;
 
 public static class Highscore
 {
-  private static string publicKey = "";
+  private static string publicKey = "e7675c72c8c01da459e42c2b159ba1b437cdcd3f871f221d0ac0849411d62ee8";
   private static Entry[] entries;
   private static float lastFetched = 0f;
   private static float cacheTime = 60f * 10f;
