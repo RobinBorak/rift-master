@@ -17,6 +17,7 @@ public class SelectPlayerCharacter : MonoBehaviour
 
   [SerializeField] private GameObject usernameCanvas;
   [SerializeField] private GameObject characterCanvas;
+  [SerializeField] private GameObject bannedWords;
 
   private Vector3 originalCameraPos;
 
@@ -70,7 +71,6 @@ public class SelectPlayerCharacter : MonoBehaviour
     if (selectedPlayerCharacter != null)
     {
       isTransitioning = true;
-      //If backbutton
       selectedPlayerCharacter = null;
       StartCoroutine(resizeRoutine(Camera.main.orthographicSize, 1f, 1.5f));
       StartCoroutine(LerpToRoutine(Camera.main.transform.position, originalCameraPos, 1.5f));
@@ -134,10 +134,21 @@ public class SelectPlayerCharacter : MonoBehaviour
 
   public void SetUsername()
   {
-    character4D.AnimationManager.SetState(CharacterState.Dance);
-    selectedPlayerCharacter.SetUsername(usernameText.text);
-    selectedPlayerCharacter.Save();
-    Invoke("GoToTown", 2f);
+    bannedWords.SetActive(false);
+
+
+    bool usernameIsValid = selectedPlayerCharacter.SetUsername(usernameText.text);
+    if (!usernameIsValid)
+    {
+      if (selectedPlayerCharacter.stringContainsBannedWords(usernameText.text))
+        bannedWords.SetActive(true);
+    }
+    else
+    {
+      character4D.AnimationManager.SetState(CharacterState.Dance);
+      selectedPlayerCharacter.Save();
+      Invoke("GoToTown", 2f);
+    }
   }
 
 

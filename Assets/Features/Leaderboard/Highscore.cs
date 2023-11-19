@@ -22,7 +22,9 @@ public static class Highscore
 
   public static void LoadEntries(Action<Entry[]> callback)
   {
-    LeaderboardCreator.GetLeaderboard(publicKey, (Entry[] _entries) =>
+    LeaderboardSearchQuery query = new LeaderboardSearchQuery();
+    query.Take = 20;
+    LeaderboardCreator.GetLeaderboard(publicKey, query, (Entry[] _entries) =>
     {
       entries = _entries;
       lastFetched = Time.time;

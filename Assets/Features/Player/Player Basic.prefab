@@ -3482,6 +3482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba6ce3fbb0a74521aab2b941f239b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usernameMaxLength: 16
   isMale: 1
   loadFromStore: 1
   key: PlayerCharacter
