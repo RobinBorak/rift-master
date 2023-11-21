@@ -44,7 +44,11 @@ public class PlayerCombat : MonoBehaviour
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.attackRange, LayerMask.GetMask("Enemy"));
     foreach (Collider2D enemy in hitEnemies)
     {
-      enemy.GetComponent<Enemy>().TakeDamage(1f, transform);
+      int minDmg = playerStats.Damage - 1 < 0 ? 0 : playerStats.Damage - 1;
+      int maxDmg = playerStats.Damage + 1;
+      int dmg = Random.Range(minDmg, maxDmg);
+      if (dmg > 0)
+        enemy.GetComponent<Enemy>().TakeDamage(dmg, transform);
     }
   }
 

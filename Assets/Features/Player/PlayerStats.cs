@@ -13,6 +13,7 @@ public class PlayerStats : MonoBehaviour
   private int maxHealth = 20;
   private float movementSpeed = 2.5f;
   private int armor = 0;
+  private int damage = 1;
 
   [Header("Combat")]
   public float attackSpeed = 1f;
@@ -38,7 +39,6 @@ public class PlayerStats : MonoBehaviour
 
       level = serializedPlayerStats.level;
       currentExp = serializedPlayerStats.currentExp;
-
     }
     else
     {
@@ -68,5 +68,10 @@ public class PlayerStats : MonoBehaviour
   public int Armor
   {
     get { return armor + playerEquipment.GetArmor(); }
+  }
+
+  public int Damage
+  {
+    get { return damage + playerEquipment.GetDamage(); }
   }
 }

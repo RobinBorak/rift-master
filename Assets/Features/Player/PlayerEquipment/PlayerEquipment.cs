@@ -183,6 +183,17 @@ public class PlayerEquipment : MonoBehaviour
     return totalArmor;
   }
 
+  public int GetDamage()
+  {
+    int totalDamage = 0;
+    if (meleeWeapon1H != null)
+    {
+      totalDamage += meleeWeapon1H.damage;
+    }
+
+    return totalDamage;
+  }
+
   private void Save()
   {
     Store.Save(key, new SerializedPlayerEquipment(

@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
   private EnemyStats enemyStats;
 
-  [SerializeField] private float currentHealth;
+  [SerializeField] private int currentHealth;
   private Rigidbody2D rb;
 
   public delegate void OnDeathDelegate();
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
   {
 
   }
-  public void TakeDamage(float damage)
+  public void TakeDamage(int damage)
   {
     currentHealth -= damage;
     if (currentHealth <= 0)
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
       Die();
     }
   }
-  public void TakeDamage(float damage, Transform fromTarget)
+  public void TakeDamage(int damage, Transform fromTarget)
   {
     TakeDamage(damage);
     gameObject.GetComponent<EnemyMovement>().Knockback(fromTarget, 50f);

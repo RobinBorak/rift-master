@@ -16,11 +16,11 @@ public class RiftItem : ScriptableObject
   public bool stackable = false;
   public int quantity = 1;
   public int armor = 0;
-  public int damage = 0;
   public string character4dId = "";
   public bool isEquippable = false;
   public EquipmentPart equipmentPart;
   public bool isUsable = false;
+  public int damage = 0;
 
   public RiftItem(
     int id,
@@ -33,7 +33,8 @@ public class RiftItem : ScriptableObject
     string character4dId,
     bool isEquippable,
     EquipmentPart equipmentPart,
-    bool isUsable
+    bool isUsable,
+    int damage
   )
   {
     this.id = id;
@@ -47,6 +48,7 @@ public class RiftItem : ScriptableObject
     this.isEquippable = isEquippable;
     this.equipmentPart = equipmentPart;
     this.isUsable = isUsable;
+    this.damage = damage;
   }
 
   public void Init(RiftItem item)
@@ -62,6 +64,7 @@ public class RiftItem : ScriptableObject
     this.isEquippable = item.isEquippable;
     this.equipmentPart = item.equipmentPart;
     this.isUsable = item.isUsable;
+    this.damage = item.damage;
   }
 
   public RiftItem()

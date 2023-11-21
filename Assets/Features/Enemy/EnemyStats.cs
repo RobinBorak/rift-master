@@ -5,7 +5,7 @@ using System;
 
 public class EnemyStats : MonoBehaviour
 {
-  public float maxHealth = 1.5f;
+  public int maxHealth = 2;
   public float movementSpeed = 0.5f;
   public float maxDistanceToTargetToMove = 10f;
 
@@ -35,7 +35,8 @@ public class EnemyStats : MonoBehaviour
 
   private void ScaleWithRift(int riftLevel = 1)
   {
-    maxHealth *= riftLevel * 0.6f;
+    float scaledMaxHealth = maxHealth * riftLevel;
+    maxHealth = (int)scaledMaxHealth;
     exp += (int)(riftLevel * 2f);
   }
 
