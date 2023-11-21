@@ -40,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (SerializedPlayerInventoryItem item in serializedInventory.items)
         {
-          AddItemFromSavedInventory(item.id, item.quantity);
+          AddNewItem(item.id, item.quantity);
         }
       }
 
@@ -68,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
     onGoldChangeDelegate?.Invoke(amount);
   }
 
-  private void AddItemFromSavedInventory(int id, int quantity)
+  private void AddNewItem(int id, int quantity)
   {
     // Remove pointer to RiftItem
     RiftItem item = ScriptableObject.CreateInstance<RiftItem>();
@@ -88,12 +88,12 @@ public class PlayerInventory : MonoBehaviour
       }
       else
       {
-        playerInventoryItems.Add(item);
+        AddNewItem(item.item.id, item.item.quantity);
       }
     }
     else
     {
-      playerInventoryItems.Add(item);
+      AddNewItem(item.item.id, item.item.quantity);
     }
     onItemChangeDelegate?.Invoke();
     Save(0);
