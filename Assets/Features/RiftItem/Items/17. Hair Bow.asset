@@ -15,11 +15,11 @@ MonoBehaviour:
   id: 17
   name: Hair bow
   description: You feel pretty.
-  icon: {fileID: 21300000, guid: 12641a670b3183046962c36cdbe3be98, type: 3}
+  icon: {fileID: 21300000, guid: be242d21e69fd544b93dd27650128d0d, type: 3}
   stackable: 0
   quantity: 1
   armor: 0
-  character4dId: Common.Casual.Armor.CasualGirl2
+  character4dId: Common.Casual.Armor.CasualGirl2 [ShowEars] [FullHair]
   isEquippable: 1
   equipmentPart: 1
   isUsable: 0
